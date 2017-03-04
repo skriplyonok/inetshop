@@ -94,5 +94,15 @@ abstract class System_Controller
     {
         return !empty($_REQUEST[$key]) ? $_REQUEST[$key] : NULL;
     }
+    public function isAdmin()
+    {
+         $userRole = $this->_getSessParam('userRole');
+        if($userRole == Model_User::ROLE_ADMIN) {
+            
+        }
+        else {
+            header('Location: /');
+        }          
+    }
 }
 

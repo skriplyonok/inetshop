@@ -8,10 +8,11 @@ body{
     background:#fff;
     margin: 0;
 }
-html, body{
+html, body, .main-wrapper{
     height:100%;
+    overflow: auto;
 }
-.main-wrapper, main{
+main{
     min-height:100%;
 }
 ul{
@@ -47,19 +48,21 @@ h2{
     max-width:1200px;
 }
 .container:after{
-    content:"";
-    display:block;
-    clear:both;
-    width:100%;
+        content: "&nbsp;";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        line-height: 0;
 }
 header{
-    position:absolute;
-    top: 0;
+    position:relative;
     width:100%;
     background-color:#000;
     color:#fff;
-    z-index:1;
+    z-index:2;
     height: 122px;
+    margin-bottom:-122px;
 }
 header .container{
     padding:10px 10px;
@@ -220,6 +223,36 @@ tbody tr:nth-child(even){
 th:first-child{
     position:relative;
 }
+
+/*Form*/
+.formwrapper{
+    padding: 10px;
+    width: 630px;
+    box-shadow: 2px 2px 15px 5px #cdcdcd;
+    margin: 0 auto;
+}
+.formwrapper [type="text"], .formwrapper [type="password"], .formwrapper [type="submit"]{
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:2px 5px 2px 10px;
+  width:200px;
+}
+.formwrapper [type="submit"]:hover{
+  cursor:pointer;
+}
+.checkbox{
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:3px 5px 3px 10px;  
+}
+.checkbox input{
+  vertical-align:middle;
+  margin-right:2px;
+}
+.checkbox label{
+  margin-right:5px;
+}
+
 a.insert {
     position: absolute;
     left: 5px;
@@ -229,17 +262,19 @@ a.insert {
     padding: 2px 5px;
     background-color: #D3D3D3;
 }
-a.insert:hover{
+a.insert:hover, .formwrapper [type="submit"]:hover{
     color:#B8860B;
     border-color:#B8860B;
     background-color: #fff;
 }
 .submitInfo{
     color:#f00;
+    margin:10px 0;
 }
 .submitInfo + a.insert{
     position:static;
 }
+
 
 
 .footer{
@@ -247,11 +282,10 @@ a.insert:hover{
     background-color:#000;
     color:#fff;
     padding: 10px;
-    position:absolute;
-    bottom: 0;
+    position:relative;
     width:100%;
     height:40px;
-    margin-top:-100px;
+    margin-top:-40px;
 }
 .footer a{
     text-decoration:underline;

@@ -75,6 +75,17 @@ $(document).ready(function() {
             }
         ); 
     });
+    
+    // Переменная куда будут располагаться данные файлов
+ 
+    var files;
+
+    // Вешаем функцию на событие
+    // Получим данные файлов и добавим их в переменную
+
+    $('input[type=file]').change(function(){
+        files = this.files;
+    });
       
     $('form[name=insert]').on('click', 'input[name=insert]', function(e){
         e.preventDefault();
@@ -89,7 +100,7 @@ $(document).ready(function() {
                 skills:   getValueCheckbox('form[name=insert] input[name=skills]:checkbox:checked'),
                 role_id:   $('form[name=insert] input[name=role_id]:checked').val(),
                 year:   $('form[name=insert] input[name=year]').val(),
-                photo:   $('form[name=insert] input[name=photo]').val()
+                photo:   files[0]
             },
             function(data){              
                 if(data.error !== undefined) {

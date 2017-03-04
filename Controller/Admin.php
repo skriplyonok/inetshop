@@ -4,15 +4,11 @@ class Controller_Admin extends System_Controller
 {
     public function indexAction()
     {
-        $userRole = $this->_getSessParam('userRole');
-        if($userRole == Model_User::ROLE_ADMIN) {
-            
-        }
-        else {
-            header('Location: /');
-        }       
+        $this->isAdmin();
     }
-    public function userAction(){
+    public function userAction()
+    {
+        $this->isAdmin();
         try {
             $allUser = Model_User :: getAllUser();
             $this->view->setParam('allUser', $allUser);
@@ -21,10 +17,14 @@ class Controller_Admin extends System_Controller
             $this->view->setParam('error', $e->getMessage());
         }
     }
-    public function insertAction(){}
+    public function insertAction()
+    {
+        $this->isAdmin();
+    }
 
     public function saveAction()
     {
+        $this->isAdmin();
       //  header('Content-Type: application/json');
       
         $params = $this->getParams();
