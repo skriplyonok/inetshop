@@ -1,0 +1,56 @@
+<?php
+/**
+ * @var Model_User $user
+ */
+$user = $view->getParam('allUser');
+?>
+
+<ul class="adminMenu">
+    <li><a href="/admin/user">Клиенты</a></li>
+    <li><a href="/admin/product">Товары</a></li>
+    <li><a href="/admin/order">Заказы</a></li>
+</ul>
+
+<div class="content">
+    <h1>Администрирование</h1>
+    <h2>Клиенты</h2>
+    <?php if($user) : ?>
+    <table>  
+        <thead>
+            <tr>
+                <th>   
+                <a class="insert" href="/admin/insert">Добавить</a>Код</th>    
+                <th>Имя</th>    
+                <th>Фамилия</th>    
+                <th>Почта</th> 
+                <th>Активность</th> 
+                <th>Навыки</th> 
+                <th>Роль</th> 
+                <th>Возраст</th> 
+                <th>Фото</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($user as $value){ ?>
+            <tr>
+                <td><?php echo $value->id; ?></td>
+                <td><?php echo $value->name; ?></td>
+                <td><?php echo $value->lastName; ?></td>
+                <td><?php echo $value->email; ?></td>
+                <td><?php echo $value->isActive; ?></td>
+                <td><?php echo $value->skills; ?></td>
+                <td><?php echo $value->role_id; ?></td>
+                <td><?php echo $value->year; ?></td>
+                <td><?php echo $value->photo; ?></td>
+                <td><a class="edit" href=""><img src="/upload/edit.png" alt="Edit"></a></td>
+                <td><a class="delete" href=""><img src="/upload/delete.png" alt="Edit"></a></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+    <?php  elseif($view->getParam('error')) : ?>
+        <div class="error"><h1><?php echo $view->getParam('error')?></h1></div>
+    <?php endif; ?>
+</div>
+
