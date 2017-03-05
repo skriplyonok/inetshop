@@ -35,19 +35,16 @@ class Model_Db_Table_User extends System_Db_Table
     public function create($params)
     {
         
-        echo '<pre>';
-        print_r($params);
-        echo '</pre>';die;
-        if ($params['photo']) {
-            $uploaddir = '/upload/';
-            $uploadfile = $uploaddir . basename($_FILES['photo']['name']);
-            $params['photo'] = $uploadfile;
+//        if ($params['photo']) {
+//            $uploaddir = '/upload/';
+//            $uploadfile = $uploaddir . basename($_FILES['photo']['name']);
+//            $params['photo'] = $uploadfile;
 //            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
 //                echo "Файл успешно загружен.\n";
 //            } else {
 //                echo "Ошибка загрузки!\n";
 //            }
-        }
+ //       }
         
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();

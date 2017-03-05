@@ -104,5 +104,32 @@ abstract class System_Controller
             header('Location: /');
         }          
     }
-}
+    public function prepareParams()
+    {
+       $requestParams = $this->getParams();
+       $params = [];
+       foreach ($requestParams as $key => $value) {
+           if( ($key != 'route') && ($key != 'MAX_FILE_SIZE') && ($key != 'insert') )
+           {
+               $params[$key] = $value;
+           }
+       }
+       $filePath = $this->loadFile();
+       $params['photo'] = $filePath;
+       return $params;
+    }
+    public function loadFile() {
+        if(!$_FILES['photo']['name'])
+        {
+            return '';
+        }
+        $relativedir = 'upload' . DS;
+        $relativefile = $relativedir . basename($_FILES['photo']['name']);
+        $uploadfile = SITE_PATH . $relativefile;
+        if (!(move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile))) {
+            echo "Ошибка загрузки!\n";
+        }
+        return $relativefile;
+    }
 
+}

@@ -26,25 +26,23 @@ class Controller_Admin extends System_Controller
     {
         $this->isAdmin();
       //  header('Content-Type: application/json');
-        $params = $this->getParams();
         
-        echo '<pre>';
-        print_r($_FILES);
-        echo '</pre>';die;    
+        $params = $this->prepareParams();
+        
+
+        
+        //$params = $this->getParams();
+        
         $userModel  = new Model_User();
         try {
             $userId     = $userModel->register($params);
-            $userData = array(
-                'id'    =>  $userId,
-                'email' =>  trim($params['email'])
-            );
            
-            echo json_encode($userData);
-            die();
+            //header('Location: /admin/insert');
+           // die();
+            $this->view->setParam('is_save', true);
         }
         catch(Exception $e) {
-            echo json_encode(array('error' => $e->getMessage()));
-            die();
+            $this->view->setParam('error', $e->getMessage());
         }
        
     }

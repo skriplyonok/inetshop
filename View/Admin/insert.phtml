@@ -1,3 +1,8 @@
+<?php
+$is_save = $view->getParam('is_save');
+$error = $view->getParam('error');
+?>
+
 <ul class="adminMenu">
     <li><a href="/admin/user">Клиенты</a></li>
     <li><a href="/admin/product">Товары</a></li>
@@ -8,7 +13,7 @@
     <h1>Администрирование</h1>
     <h2>Добавление клиента</h2>
     <div class="formwrapper">
-        <form name="insert" action="/admin/save" enctype="multipart/form-data" method="POST" autocomplete="off">
+        <form <?php if ($is_save) { echo 'class="hide"'; } ?> name="insert" action="/admin/save" enctype="multipart/form-data" method="POST" autocomplete="off">
             <p>
                 <input placeholder="Имя" type="text" name="first_name" maxlength="20" /><br />
                 <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" /><br />
@@ -36,7 +41,16 @@
             </p>     
             <input type="submit" name="insert" value="Сохранить" />
         </form>
-        <p class="submitInfo"></p>
-        <a class="insert hide" href="/admin/insert">Добавить еще</a>
+        <p class="submitInfo"><?php 
+            if($is_save)
+            {
+                echo 'Сохранено!';
+            }
+            if($error)
+            {
+                echo $error;
+            }
+        ?></p>
+        <a class="insert <?php if (!$is_save) { echo 'hide'; } ?>" href="/admin/insert">Добавить еще</a>
     </div>
 </div>
