@@ -125,7 +125,10 @@ class Model_User
      * @throws Exception
      */
     public function register($params)
-    {
+    {        
+        echo '<pre>';
+        print_r($params);
+        echo '</pre>';die;
         if(!$this->_validate($params))
         {
             throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);

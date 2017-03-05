@@ -26,8 +26,11 @@ class Controller_Admin extends System_Controller
     {
         $this->isAdmin();
       //  header('Content-Type: application/json');
-      
         $params = $this->getParams();
+        
+        echo '<pre>';
+        print_r($_FILES);
+        echo '</pre>';die;    
         $userModel  = new Model_User();
         try {
             $userId     = $userModel->register($params);

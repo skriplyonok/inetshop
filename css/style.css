@@ -66,6 +66,7 @@ header{
 }
 header .container{
     padding:10px 10px;
+    max-height:122px;
 }
 .logo{
     float:left;
