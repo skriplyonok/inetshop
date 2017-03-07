@@ -35,22 +35,11 @@ class Model_Db_Table_User extends System_Db_Table
     public function create($params)
     {
         
-//        if ($params['photo']) {
-//            $uploaddir = '/upload/';
-//            $uploadfile = $uploaddir . basename($_FILES['photo']['name']);
-//            $params['photo'] = $uploadfile;
-//            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-//                echo "Файл успешно загружен.\n";
-//            } else {
-//                echo "Ошибка загрузки!\n";
-//            }
- //       }
-        
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();
         $arrayData = array();
         foreach($arrayAllFields as $field){
-            if(!empty($params[$field]) && $field != 'route'){
+            if(!empty($params[$field]) && $field != 'route' && $field != 'save'){
                 $arraySetFields[] = $field;
                 if($field == 'password')
                 {
@@ -68,13 +57,16 @@ class Model_Db_Table_User extends System_Db_Table
             $sth = $this->getConnection()->prepare('INSERT INTO ' . $this->getName() . ' ('.$forQueryFields.') values ('.$forQueryPlace.')');
 
             $result = $sth->execute($arrayData);
-
+            
         }catch(PDOException $e){
             echo 'Error : '.$e->getMessage();
             exit();
         }
-         
-        return $result;
+        
+        if($result)
+        {
+            return $this->getConnection()->lastInsertId();          
+        }
     }
     /**
      * 

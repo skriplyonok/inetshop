@@ -19,7 +19,7 @@ class Controller_Authorize extends System_Controller
         
         $userModel  = new Model_User();
         try {
-            $userId     = $userModel->register($params);
+            $userId = $userModel->register($params);
             $this->_setSessParam('currentUser', $userId); 
             if($this->getParamByKey('save') == 'true') {
                 $this->_setSessParam('is_save', 1);

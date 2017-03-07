@@ -140,14 +140,14 @@ class Model_User
         }
         else {
             $resCreate = $tableUser->create($params);
-
+            
             if(!$resCreate) {
                 throw new Exception('Can\'t create new user. Try later.', System_Exception :: ERROR_CREATE_USER);
             }
             return $resCreate;
         }
     }
-    
+
     /**
      * 
      * @param array $params
