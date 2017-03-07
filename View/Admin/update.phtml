@@ -1,0 +1,92 @@
+<?php
+$is_save = $view->getParam('is_save');
+$error = $view->getParam('error');
+$user = $view->getParam('user');
+?>
+
+<ul class="adminMenu">
+    <li><a href="/admin/user">Клиенты</a></li>
+    <li><a href="/admin/product">Товары</a></li>
+    <li><a href="/admin/order">Заказы</a></li>
+</ul>
+
+<div class="content">
+    <h1>Администрирование</h1>
+    <h2>Изменение клиента</h2>
+    <?php if($user) : ?>
+    <table>  
+        <thead>
+            <tr>
+                <th>Код</th>>
+                <th>Имя</th>    
+                <th>Фамилия</th>    
+                <th>Почта</th> 
+                <th>Активность</th> 
+                <th>Навыки</th> 
+                <th>Роль</th> 
+                <th>Возраст</th> 
+                <th>Фото</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?php echo $user->id; ?></td>
+                <td><?php echo $user->name; ?></td>
+                <td><?php echo $user->lastName; ?></td>
+                <td><?php echo $user->email; ?></td>
+                <td><?php echo $user->isActive; ?></td>
+                <td><?php echo $user->skills; ?></td>
+                <td><?php echo $user->role_id; ?></td>
+                <td><?php echo $user->year; ?></td>
+                <td><?php echo $user->photo; ?></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <?php  elseif($view->getParam('error')) : ?>
+        <div class="error"><h1><?php echo $user->getParam('error')?></h1></div>
+    <?php endif; ?>
+        
+    <div class="formwrapper">
+        <form <?php if ($is_save) { echo 'class="hide"'; } ?> name="insert" action="/admin/save" enctype="multipart/form-data" method="POST" autocomplete="off">
+            <p>
+                <input type="hidden" name="id" value="<?php echo $user->id; ?>">
+                <input placeholder="Имя" type="text" name="first_name" maxlength="20" value="<?php echo $user->name; ?>"/><br />
+                <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" value="<?php echo $user->lastName; ?>"/><br />
+                <input placeholder="Почта" type="text" name="email" maxlength="20" value="<?php echo $user->email; ?>"/><br /> 
+            </p>
+            <p class="checkbox">
+                <input id="PHP" type="checkbox" name="skills" value="PHP"><label for="PHP">PHP</label>
+                <input id="CSS" type="checkbox" name="skills" value="CSS"><label for="CSS">CSS</label>
+                <input id="Javascript" type="checkbox" name="skills" value="Javascript"><label for="Javascript">Javascript</label>
+                <input id="Java" type="checkbox" name="skills" value="Java"><label for="Java">Java</label>
+                <input id="HTML" type="checkbox" name="skills" value="HTML" checked><label for="HTML">HTML</label>
+                <input id="Web-design" type="checkbox" name="skills" value="Web-design"><label for="Web-design">Web-design</label>
+            </p>
+            <p class="checkbox">
+                <input id="role2" type="radio" name="role_id" value="2" checked><label for="role2">Простой клиент</label>
+                <input id="role5" type="radio" name="role_id" value="5"><label for="role5">Администратор</label>
+                <input id="role6" type="radio" name="role_id" value="6"><label for="role6">Продвинутый клиент</label>
+                <input id="role7" type="radio" name="role_id" value="7"><label for="role7">Супер клиент</label>
+            </p>
+            <p>
+                <input placeholder="Возраст" type="text" name="year" maxlength="20" value="<?php echo $user->year; ?>"/><br />
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+                <input placeholder="Фото" type="file" name="photo" maxlength="30" value="<?php echo $user->photo; ?>"/><br />
+            </p>     
+            <input type="submit" name="insert" value="Сохранить" />
+        </form>
+        <p class="submitInfo"><?php 
+            if($is_save)
+            {
+                echo 'Сохранено!';
+            }
+            if($error)
+            {
+                echo $error;
+            }
+        ?></p>
+<!--        <a class="insert <?php //if (!$is_save) { echo 'hide'; } ?>" href="/admin/insert">Добавить еще</a>-->
+    </div>
+</div>
+

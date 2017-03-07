@@ -6,6 +6,8 @@ class Model_User
      */
     const MODE_REGISTER = 1;
     const MODE_LOGIN = 2;
+    const MODE_INSERT = 3;
+    const MODE_UPDATE = 4;
     const ROLE_ADMIN = 5;
     /**
     *Cookie lifetime;
@@ -84,11 +86,15 @@ class Model_User
         
         if(!empty($userData)) {
             $modelUser  = new self();
-            $modelUser->name       = $userData->first_name;
-            $modelUser->id          = $userData->id;
-            $modelUser->email       = $userData->email;
-            //$modelUser->photo       = $userData->photo;
-            $modelUser->role_id     = $userData->role_id;
+                $modelUser->id          = $userData->id;
+                $modelUser->name       = $userData->first_name;
+                $modelUser->lastName       = $userData->last_name;
+                $modelUser->email       = $userData->email;                
+                $modelUser->isActive       = $userData->is_active; 
+                $modelUser->skills       = $userData->skills; 
+                $modelUser->role_id     = $userData->role_id;                
+                $modelUser->year     = $userData->year;                
+                $modelUser->photo       = $userData->photo;      
 
             return $modelUser;
         }
@@ -124,12 +130,12 @@ class Model_User
      * @param array $params
      * @throws Exception
      */
-    public function register($params)
+    public function register($params, $mode = Model_User::MODE_UPDATE)
     {        
-        if(!$this->_validate($params))
-        {
-            throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
-        }
+//        if(!$this->_validate($params))
+//        {
+//            throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
+//        }
         
         $tableUser = new Model_Db_Table_User();
    
@@ -139,12 +145,17 @@ class Model_User
             throw new Exception('Such account is already exists.', System_Exception :: ALREADY_EXISTS);
         }
         else {
-            $resCreate = $tableUser->create($params);
+            if($mode === Model_User::MODE_UPDATE)
+            {
+                $res = $tableUser->update($params);
+            }else{
+                $res = $tableUser->create($params);   
+            }
             
-            if(!$resCreate) {
+            if(!$res) {
                 throw new Exception('Can\'t create new user. Try later.', System_Exception :: ERROR_CREATE_USER);
             }
-            return $resCreate;
+            return $res;
         }
     }
 

@@ -2,6 +2,8 @@
 
 class Controller_Admin extends System_Controller
 {
+    private $_mode = 0;
+    
     public function indexAction()
     {
         $this->isAdmin();
@@ -20,25 +22,50 @@ class Controller_Admin extends System_Controller
     public function insertAction()
     {
         $this->isAdmin();
+        $_mode = Model_User::MODE_INSERT;
+    }
+    public function updateAction()
+    {
+        $this->isAdmin();
+        $_mode = Model_User::MODE_UPDATE;
+        
+        $args = $this->getArgs();
+        $userId = $args['id'];
+       
+        try {
+            $modelUser = Model_User :: getById($userId);
+            $this->view->setParam('user', $modelUser);
+        }
+        catch(Exception $e) {
+            $this->view->setParam('error', $e->getMessage());
+        }
     }
 
     public function saveAction()
     {
         $this->isAdmin();
-      //  header('Content-Type: application/json');
-        
+
         $params = $this->prepareParams();
-        
+        if($params['id'])
+        {
+            $_mode = Model_User::MODE_UPDATE;
+        }
 
         
         //$params = $this->getParams();
         
         $userModel  = new Model_User();
         try {
-            $userId     = $userModel->register($params);
+            if($_mode === Model_User::MODE_UPDATE)
+            {
+                $userId     = $userModel->register($params, $_mode);
+                        echo '<pre>';
+        print_r($params);
+        echo '</pre>';die;
+            }else{
+                $userId     = $userModel->register($params);
+            }
            
-            //header('Location: /admin/insert');
-           // die();
             $this->view->setParam('is_save', true);
         }
         catch(Exception $e) {

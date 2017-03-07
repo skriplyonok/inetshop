@@ -13,7 +13,7 @@ abstract class System_Controller
      * 
      * @param array $args
      */
-   // public $args;
+    //public $args;
     
     /**
      *
