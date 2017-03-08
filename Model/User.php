@@ -87,12 +87,12 @@ class Model_User
         if(!empty($userData)) {
             $modelUser  = new self();
                 $modelUser->id          = $userData->id;
-                $modelUser->name       = $userData->first_name;
-                $modelUser->lastName       = $userData->last_name;
-                $modelUser->email       = $userData->email;                
-                $modelUser->isActive       = $userData->is_active; 
-                $modelUser->skills       = $userData->skills; 
-                $modelUser->role_id     = $userData->role_id;                
+            $modelUser->name       = $userData->first_name;
+            $modelUser->lastName       = $userData->last_name;
+            $modelUser->email       = $userData->email;
+            $modelUser->isActive       = $userData->is_active; 
+            $modelUser->skills       = $userData->skills; 
+            $modelUser->role_id     = $userData->role_id;
                 $modelUser->year     = $userData->year;                
                 $modelUser->photo       = $userData->photo;      
 
@@ -133,14 +133,14 @@ class Model_User
     public function register($params, $mode = Model_User::MODE_INSERT)
     {   
 
-        if(!$this->_validate($params, $mode) && !empty($params['email']))
-        {
+        if(!$this->_validate($params, $mode))
+    {        
             throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
         }
         
         $tableUser = new Model_Db_Table_User();
         
-        if($mode === Model_User::MODE_INSERT && !empty($params['email']))
+        if($mode === Model_User::MODE_INSERT)
         {
             $resIfExists = $tableUser->checkIfExists($params);
         }else{

@@ -75,7 +75,7 @@ $(document).ready(function() {
             }
         );
     });
-    
+
     $('input.edit').click(function(e){
         e.preventDefault();
         window.location = '/admin/update/id/' + $(this).attr('data-id');

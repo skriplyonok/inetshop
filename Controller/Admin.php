@@ -45,12 +45,12 @@ class Controller_Admin extends System_Controller
 
         
         $params = $this->prepareParams();
-
+        
         //$params = $this->getParams();
         
         $userModel  = new Model_User();
         try {
-            if(isset($params['id']))
+            if(!empty($params['id']))
             {
                 $userId     = $userModel->register($params, Model_User::MODE_UPDATE);
             }else{

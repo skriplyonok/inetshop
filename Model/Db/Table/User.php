@@ -33,7 +33,8 @@ class Model_Db_Table_User extends System_Db_Table
      * @return int 
      */
     public function create($params)
-    {      
+    {
+        
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();
         $arrayData = array();

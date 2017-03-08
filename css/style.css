@@ -239,25 +239,25 @@ th:first-child{
     margin: 0 auto;
 }
 .formwrapper [type="text"], .formwrapper [type="password"], .formwrapper [type="submit"]{
-    margin-bottom:5px;
-    border:1px solid #000;
-    padding:2px 5px 2px 10px;
-    width:200px;
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:2px 5px 2px 10px;
+  width:200px;
 }
 .formwrapper [type="submit"]:hover{
-    cursor:pointer;
+  cursor:pointer;
 }
 .checkbox{
-    margin-bottom:5px;
-    border:1px solid #000;
-    padding:3px 5px 3px 10px;  
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:3px 5px 3px 10px;  
 }
 .checkbox input{
-    vertical-align:middle;
-    margin-right:2px;
+  vertical-align:middle;
+  margin-right:2px;
 }
 .checkbox label{
-    margin-right:5px;
+  margin-right:5px;
 }
 
 a.insert {
