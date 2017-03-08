@@ -87,7 +87,8 @@ $(document).ready(function() {
             if(skills){
                 skills += ',';
             }
-            skills += ($(this).val());
+                 skills += ($(this).val());    
+
             });
         return skills;
     }

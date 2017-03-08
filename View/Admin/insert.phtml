@@ -21,12 +21,12 @@ $error = $view->getParam('error');
                 <input placeholder="Пароль" type="password" name="password" maxlength="30"/><br />
             </p>
             <p class="checkbox">
-                <input id="PHP" type="checkbox" name="skills" value="PHP"><label for="PHP">PHP</label>
-                <input id="CSS" type="checkbox" name="skills" value="CSS"><label for="CSS">CSS</label>
-                <input id="Javascript" type="checkbox" name="skills" value="Javascript"><label for="Javascript">Javascript</label>
-                <input id="Java" type="checkbox" name="skills" value="Java"><label for="Java">Java</label>
-                <input id="HTML" type="checkbox" name="skills" value="HTML" checked><label for="HTML">HTML</label>
-                <input id="Web-design" type="checkbox" name="skills" value="Web-design"><label for="Web-design">Web-design</label>
+                <input id="PHP" type="checkbox" name="skills[]" value="PHP"><label for="PHP">PHP</label>
+                <input id="CSS" type="checkbox" name="skills[]" value="CSS"><label for="CSS">CSS</label>
+                <input id="Javascript" type="checkbox" name="skills[]" value="Javascript"><label for="Javascript">Javascript</label>
+                <input id="Java" type="checkbox" name="skills[]" value="Java"><label for="Java">Java</label>
+                <input id="HTML" type="checkbox" name="skills[]" value="HTML" checked><label for="HTML">HTML</label>
+                <input id="Web-design" type="checkbox" name="skills[]" value="Web-design"><label for="Web-design">Web-design</label>
             </p>
             <p class="checkbox">
                 <input id="role2" type="radio" name="role_id" value="2" checked><label for="role2">Простой клиент</label>

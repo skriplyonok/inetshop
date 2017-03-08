@@ -131,15 +131,16 @@ class Model_User
      * @throws Exception
      */
     public function register($params, $mode = Model_User::MODE_INSERT)
-    {        
-        if(!$this->_validate($params, $mode))
+    {   
+
+        if(!$this->_validate($params, $mode) && !empty($params['email']))
         {
             throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
         }
         
         $tableUser = new Model_Db_Table_User();
         
-        if($mode === Model_User::MODE_INSERT)
+        if($mode === Model_User::MODE_INSERT && !empty($params['email']))
         {
             $resIfExists = $tableUser->checkIfExists($params);
         }else{

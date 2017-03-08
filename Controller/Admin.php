@@ -2,7 +2,6 @@
 
 class Controller_Admin extends System_Controller
 {
-    private $_mode = 0;
     
     public function indexAction()
     {
@@ -22,12 +21,10 @@ class Controller_Admin extends System_Controller
     public function insertAction()
     {
         $this->isAdmin();
-        $_mode = Model_User::MODE_INSERT;
     }
     public function updateAction()
     {
         $this->isAdmin();
-        $_mode = Model_User::MODE_UPDATE;
         
         $args = $this->getArgs();
         $userId = $args['id'];
@@ -44,21 +41,18 @@ class Controller_Admin extends System_Controller
     public function saveAction()
     {
         $this->isAdmin();
-
-        $params = $this->prepareParams();
-        if($params['id'])
-        {
-            $_mode = Model_User::MODE_UPDATE;
-        }
+        
 
         
+        $params = $this->prepareParams();
+
         //$params = $this->getParams();
         
         $userModel  = new Model_User();
         try {
-            if($_mode === Model_User::MODE_UPDATE)
+            if(isset($params['id']))
             {
-                $userId     = $userModel->register($params, $_mode);
+                $userId     = $userModel->register($params, Model_User::MODE_UPDATE);
             }else{
                 $userId     = $userModel->register($params);
             }

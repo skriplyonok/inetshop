@@ -73,27 +73,23 @@ class Model_Db_Table_User extends System_Db_Table
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();
         $arrayData = array();
-//        foreach ($arrayAllFields as $field) {
-//            if (!empty($params[$field]) && $field != 'route' && $field != 'save' && $field != 'id') {
-//                $arraySetFields[] = $field;
-//                if ($field == 'password') {
-//                    $arrayData[] = sha1($params[$field]);
-//                } else {
-//                    $arrayData[] = $params[$field];
-//                }
-//            }
-//        }
-        $arrayData[] = $params['first_name'];
-        $arrayData[] = $params['id'];
+        foreach ($arrayAllFields as $field) {
+            if (!empty($params[$field]) && $field != 'route' && $field != 'save' && $field != 'id') {
+                $arraySetFields[] = $field;
+                if ($field == 'password') {
+                    $arrayData[] = sha1($params[$field]);
+                } else {
+                    $arrayData[] = $params[$field];
+                }
+            }
+        }
+        $arrayData[] = $params['id'];;
+        $forQueryPlace = implode('=?, ', $arraySetFields);
+        $forQueryPlace = $forQueryPlace . '=? where id=?';
         
-        $forQueryFields = implode(', ', $arraySetFields);
-        $rangePlace = array_fill(0, count($arraySetFields), '?');
-        $forQueryPlace = implode(', ', $rangePlace);
-        
-
-        
+   
         try {
-            $sth = $this->getConnection()->prepare('update user set first_name=? where id=?');
+            $sth = $this->getConnection()->prepare('update ' . $this->getName() . ' set ' . $forQueryPlace);
 
             $result = $sth->execute($arrayData);
         } catch (PDOException $e) {

@@ -114,8 +114,16 @@ abstract class System_Controller
                $params[$key] = $value;
            }
        }
-       $filePath = $this->loadFile();
-       $params['photo'] = $filePath;
+       if(isset($params['skills']))
+       {
+           $params['skills'] = implode(',', $params['skills']);
+       }
+       
+
+           $filePath = $this->loadFile();
+           $params['photo'] = $filePath;
+
+       
        return $params;
     }
     public function loadFile() {

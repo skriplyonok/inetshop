@@ -6,6 +6,8 @@
             <file>file:/C:/OpenServer/domains/inetshop.com/Model/Db/Table/User.php</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/View/Admin/save.phtml</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/System/Controller.php</file>
+            <file>file:/C:/OpenServer/domains/inetshop.com/System/Router.php</file>
+            <file>file:/C:/OpenServer/domains/inetshop.com/System/View.php</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/js/authorize.js</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/System/Db/Table.php</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/View/Admin/insert.phtml</file>
@@ -16,7 +18,10 @@
             <file>file:/C:/OpenServer/domains/inetshop.com/css/style.css</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/Controller/Authorize.php</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/System/Registry.php</file>
+            <file>file:/C:/OpenServer/domains/inetshop.com/View/Admin/update.phtml</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/Controller/Admin.php</file>
+            <file>file:/C:/OpenServer/domains/inetshop.com/Controller/User.php</file>
+            <file>file:/C:/OpenServer/domains/inetshop.com/View/Admin/index.phtml</file>
             <file>file:/C:/OpenServer/domains/inetshop.com/View/User/profile.phtml</file>
         </group>
     </open-files>
