@@ -42,7 +42,7 @@ $user = $view->getParam('allUser');
                 <td><?php echo $value->role_id; ?></td>
                 <td><?php echo $value->year; ?></td>
                 <td><?php echo $value->photo; ?></td>
-                <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit"></td>
+                <td><a class="edit" href=""><img src="/upload/edit.png" alt="Edit"></a></td>
                 <td><a class="delete" href=""><img src="/upload/delete.png" alt="Edit"></a></td>
             </tr>
             <?php } ?>

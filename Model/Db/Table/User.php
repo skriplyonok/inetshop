@@ -33,7 +33,8 @@ class Model_Db_Table_User extends System_Db_Table
      * @return int 
      */
     public function create($params)
-    {      
+    {
+        
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();
         $arrayData = array();
@@ -67,40 +68,6 @@ class Model_Db_Table_User extends System_Db_Table
             return $this->getConnection()->lastInsertId();          
         }
     }
-    public function update($param) 
-    {
-
-        $arrayAllFields = array_keys($params);
-        $arraySetFields = array();
-        $arrayData = array();
-        foreach ($arrayAllFields as $field) {
-            if (!empty($params[$field]) && $field != 'route' && $field != 'save') {
-                $arraySetFields[] = $field;
-                if ($field == 'password') {
-                    $arrayData[] = sha1($params[$field]);
-                } else {
-                    $arrayData[] = $params[$field];
-                }
-            }
-        }
-        $forQueryFields = implode(', ', $arraySetFields);
-        $rangePlace = array_fill(0, count($arraySetFields), '?');
-        $forQueryPlace = implode(', ', $rangePlace);
-
-        try {
-            $sth = $this->getConnection()->prepare('update user set id=?, first_name=?, last_name=?, email=?, skills=?, role_id=?, year=?, photo=?');
-
-            $result = $sth->execute($arrayData);
-        } catch (PDOException $e) {
-            echo 'Error : ' . $e->getMessage();
-            exit();
-        }
-
-        if ($result) {
-            return $this->getConnection()->lastInsertId();
-        }
-    }
-
     /**
      * 
      * @param array $params

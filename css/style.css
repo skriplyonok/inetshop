@@ -8,11 +8,9 @@ body{
     background:#fff;
     margin: 0;
 }
-html, body{
+html, body, .main-wrapper{
     height:100%;
-}
-.main-wrapper {
-    height:100%;
+    overflow: auto;
 }
 main{
     min-height:100%;
@@ -50,10 +48,12 @@ h2{
     max-width:1200px;
 }
 .container:after{
-    content:"";
-    display:block;
-    clear:both;
-    width:100%;
+        content: "&nbsp;";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        line-height: 0;
 }
 header{
     position:relative;
@@ -66,7 +66,7 @@ header{
 }
 header .container{
     padding:10px 10px;
-    max-height: 122px;
+    max-height:122px;
 }
 .logo{
     float:left;
@@ -217,13 +217,9 @@ th{
 tbody tr:nth-child(even){
     background-color:#DCDCDC;
 }
-.edit, .delete img{
+.edit img, .delete img{
     width:15px;
     height:15px;
-    border:none;
-}
-.edit{
-    background: url(/upload/edit.png) 100% 0 no-repeat / cover;
 }
 th:first-child{
     position:relative;
@@ -232,30 +228,30 @@ th:first-child{
 /*Form*/
 .formwrapper{
     padding: 10px;
-    width: 610px;
+    width: 630px;
     box-shadow: 2px 2px 15px 5px #cdcdcd;
     margin: 0 auto;
 }
 .formwrapper [type="text"], .formwrapper [type="password"], .formwrapper [type="submit"]{
-    margin-bottom:5px;
-    border:1px solid #000;
-    padding:2px 5px 2px 10px;
-    width:200px;
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:2px 5px 2px 10px;
+  width:200px;
 }
 .formwrapper [type="submit"]:hover{
-    cursor:pointer;
+  cursor:pointer;
 }
 .checkbox{
-    margin-bottom:5px;
-    border:1px solid #000;
-    padding:3px 5px 3px 10px;  
+  margin-bottom:5px;
+  border:1px solid #000;
+  padding:3px 5px 3px 10px;  
 }
 .checkbox input{
-    vertical-align:middle;
-    margin-right:2px;
+  vertical-align:middle;
+  margin-right:2px;
 }
 .checkbox label{
-    margin-right:5px;
+  margin-right:5px;
 }
 
 a.insert {
@@ -294,36 +290,4 @@ a.insert:hover, .formwrapper [type="submit"]:hover{
 }
 .footer a{
     text-decoration:underline;
-}
-
-.popup{
-    width:100%;
-    min-height:100%;
-    overflow:hidden;
-    position:absolute;
-    top:0px;
-    z-index:100;
-    display:none;
-    background-color:rgba(0, 0, 0, 0.5);
-}
-.popup .popup-content{
-    margin:10% auto 0px auto;
-    width:250px;
-    height:150px;
-    background: #fff;
-    position:relative;
-    color:#000;
-    text-align:center;
-    padding-top:35px;
-}
-.popup p{
-    font-size:30px;
-    line-height:32px;
-    margin-bottom:35px;
-}
-.popup a{
-    color:#000;
-    position:static;
-    padding:5px 15px;
-    margin:0 20px;
 }
