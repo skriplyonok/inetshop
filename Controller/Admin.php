@@ -59,9 +59,6 @@ class Controller_Admin extends System_Controller
             if($_mode === Model_User::MODE_UPDATE)
             {
                 $userId     = $userModel->register($params, $_mode);
-                        echo '<pre>';
-        print_r($params);
-        echo '</pre>';die;
             }else{
                 $userId     = $userModel->register($params);
             }

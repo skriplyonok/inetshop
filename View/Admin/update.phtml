@@ -17,7 +17,7 @@ $user = $view->getParam('user');
     <table>  
         <thead>
             <tr>
-                <th>Код</th>>
+                <th>Код</th>    
                 <th>Имя</th>    
                 <th>Фамилия</th>    
                 <th>Почта</th> 
@@ -44,7 +44,7 @@ $user = $view->getParam('user');
     </table>
 
     <?php  elseif($view->getParam('error')) : ?>
-        <div class="error"><h1><?php echo $user->getParam('error')?></h1></div>
+        <div class="error"><?php echo $view->getParam('error')?></div>
     <?php endif; ?>
         
     <div class="formwrapper">

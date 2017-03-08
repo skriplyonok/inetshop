@@ -130,16 +130,22 @@ class Model_User
      * @param array $params
      * @throws Exception
      */
-    public function register($params, $mode = Model_User::MODE_UPDATE)
+    public function register($params, $mode = Model_User::MODE_INSERT)
     {        
-//        if(!$this->_validate($params))
-//        {
-//            throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
-//        }
+        if(!$this->_validate($params, $mode))
+        {
+            throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
+        }
         
         $tableUser = new Model_Db_Table_User();
-   
-        $resIfExists = $tableUser->checkIfExists($params);
+        
+        if($mode === Model_User::MODE_INSERT)
+        {
+            $resIfExists = $tableUser->checkIfExists($params);
+        }else{
+            $resIfExists = $tableUser->checkEmail($params);
+        }
+        
         
         if(!empty($resIfExists)) {
             throw new Exception('Such account is already exists.', System_Exception :: ALREADY_EXISTS);
@@ -164,13 +170,13 @@ class Model_User
      * @param array $params
      * @return boolean
      */
-    private function _validate($params)
+    private function _validate($params, $mode = Model_User::MODE_INSERT)
     {
         $login      = !empty($params['email']) ? $params['email'] : '';
         $password   = !empty($params['password']) ? $params['password'] : '';
         
         
-        if(!$password || !$login) {
+        if( (!$password && $mode == Model_User::MODE_INSERT) || !$login) {
             return false;
         }
         if(strlen($login > 20)) {

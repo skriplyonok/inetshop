@@ -67,28 +67,33 @@ class Model_Db_Table_User extends System_Db_Table
             return $this->getConnection()->lastInsertId();          
         }
     }
-    public function update($param) 
+    public function update($params) 
     {
 
         $arrayAllFields = array_keys($params);
         $arraySetFields = array();
         $arrayData = array();
-        foreach ($arrayAllFields as $field) {
-            if (!empty($params[$field]) && $field != 'route' && $field != 'save') {
-                $arraySetFields[] = $field;
-                if ($field == 'password') {
-                    $arrayData[] = sha1($params[$field]);
-                } else {
-                    $arrayData[] = $params[$field];
-                }
-            }
-        }
+//        foreach ($arrayAllFields as $field) {
+//            if (!empty($params[$field]) && $field != 'route' && $field != 'save' && $field != 'id') {
+//                $arraySetFields[] = $field;
+//                if ($field == 'password') {
+//                    $arrayData[] = sha1($params[$field]);
+//                } else {
+//                    $arrayData[] = $params[$field];
+//                }
+//            }
+//        }
+        $arrayData[] = $params['first_name'];
+        $arrayData[] = $params['id'];
+        
         $forQueryFields = implode(', ', $arraySetFields);
         $rangePlace = array_fill(0, count($arraySetFields), '?');
         $forQueryPlace = implode(', ', $rangePlace);
+        
 
+        
         try {
-            $sth = $this->getConnection()->prepare('update user set id=?, first_name=?, last_name=?, email=?, skills=?, role_id=?, year=?, photo=?');
+            $sth = $this->getConnection()->prepare('update user set first_name=? where id=?');
 
             $result = $sth->execute($arrayData);
         } catch (PDOException $e) {
@@ -96,9 +101,8 @@ class Model_Db_Table_User extends System_Db_Table
             exit();
         }
 
-        if ($result) {
-            return $this->getConnection()->lastInsertId();
-        }
+        return $result;
+        
     }
 
     /**
@@ -129,5 +133,22 @@ class Model_Db_Table_User extends System_Db_Table
         
         return $result;
     }
-    
+    public function checkEmail($params)
+    {
+        $login      = trim($params['email']);
+        $id = trim($params['id']);
+        
+        $requestParams = array($login, $id);
+        
+        $sql = 'select * from ' . $this->getName() . ' where email = ? and id != ? ';
+        
+        /**
+         * @var PDOStatement $sth 
+         */
+        $sth = $this->getConnection()->prepare($sql);
+        $sth->execute($requestParams);
+        $result = $sth->fetchAll(PDO::FETCH_OBJ);        
+        
+        return $result;
+    }    
 }
