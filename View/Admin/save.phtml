@@ -1,3 +1,10 @@
 <?php
-include 'insert.phtml';
+
+if($view->getParam('mode') == Model_User::MODE_INSERT)
+{
+    include 'insert.phtml';
+}else{
+    include 'update.phtml';
+}
+
 ?>

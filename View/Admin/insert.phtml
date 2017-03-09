@@ -37,7 +37,11 @@ $error = $view->getParam('error');
             <p>
                 <input placeholder="Возраст" type="text" name="year" maxlength="20" /><br />
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                <input placeholder="Фото" type="file" name="photo" maxlength="30" /><br />
+                <div class="file-upload">
+                    <button type="button">Выбрать</button>
+                    <div>Файл не выбран</div>
+                    <input type="file" name="photo">
+                </div>
             </p>     
             <input type="submit" name="insert" value="Сохранить" />
         </form>

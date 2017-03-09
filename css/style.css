@@ -75,9 +75,18 @@ header .container{
     text-align: center;
     width:150px;
 }
-.logo a{
+.logo a, .logo span{
+    display:block;
+}
+.logo .mainlogo{
     font:30px/32px Impact,Charcoal, sans-serif;
     color:#DAA520;
+}
+.logo .slogan{
+    font-style:italic;
+    font-family:Florence;
+    font-size:17px;
+    line-height:19px;
 }
 #mainmenu{
     text-align: center;
@@ -199,7 +208,7 @@ main, main a{
     font-weight:bold;
 }
 table{
-    margin: 0 auto;
+    margin: 0 auto 30px;
     border-collapse: collapse;
     border-spacing: 0;
     font-size:10px;
@@ -218,13 +227,17 @@ th{
 tbody tr:nth-child(even){
     background-color:#DCDCDC;
 }
-.edit, .delete img{
+.edit, .delete{
     width:15px;
     height:15px;
     border:none;
 }
 .edit{
     background: url(/upload/edit.png) 100% 0 no-repeat;
+    background-size: cover;
+}
+.delete{
+    background: url(/upload/delete.png) 100% 0 no-repeat;
     background-size: cover;
 }
 th:first-child{
@@ -239,25 +252,28 @@ th:first-child{
     margin: 0 auto;
 }
 .formwrapper [type="text"], .formwrapper [type="password"], .formwrapper [type="submit"]{
-  margin-bottom:5px;
-  border:1px solid #000;
-  padding:2px 5px 2px 10px;
-  width:200px;
+    margin-bottom:5px;
+    border:1px solid #000;
+    padding:2px 5px 2px 10px;
+    width:200px;
+}
+.formwrapper [type="file"]{ 
+    margin-bottom:5px;
 }
 .formwrapper [type="submit"]:hover{
-  cursor:pointer;
+    cursor:pointer;
 }
 .checkbox{
-  margin-bottom:5px;
-  border:1px solid #000;
-  padding:3px 5px 3px 10px;  
+    margin-bottom:5px;
+    border:1px solid #000;
+    padding:3px 5px 3px 10px;  
 }
 .checkbox input{
-  vertical-align:middle;
-  margin-right:2px;
+    vertical-align:middle;
+    margin-right:2px;
 }
 .checkbox label{
-  margin-right:5px;
+    margin-right:5px;
 }
 
 a.insert {
@@ -283,6 +299,45 @@ a.insert:hover, .formwrapper [type="submit"]:hover{
 }
 
 
+/*styling file-upload*/
+.file-upload{
+    position: relative;
+    overflow: auto; 
+    font-size: 1em;  
+    height: 1.6em;   
+    line-height: 1.125em; 
+    margin-bottom:5px;
+    border:1px solid #000;
+    width:281px;
+}
+.file-upload > button{
+    float: right;
+    height: 1.125em;  
+    height: 100%;
+    border:1px solid #000;
+    border-width:0 0 0 1px;
+    padding:2px 5px 2px 10px;
+}
+.file-upload > div{
+    height: 1.125em;
+    padding:2px 5px 2px 10px;
+    cursor: pointer;
+    color:#808080;
+}
+.file-upload input[type=file]{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /*  transform: scale(20);*/
+    /*  letter-spacing: 10em;     /* IE 9 fix */
+    /*  -ms-transform: scale(20); /* IE 9 fix */
+    opacity: 0;
+    cursor: pointer;
+    z-index:100;
+}
+
 
 .footer{
     text-align: center;
@@ -298,11 +353,12 @@ a.insert:hover, .formwrapper [type="submit"]:hover{
     text-decoration:underline;
 }
 
+/*pop-up*/
 .popup{
     width:100%;
-    min-height:100%;
-    overflow:hidden;
-    position:absolute;
+    height:100%;
+    overflow:auto;
+    position:fixed;
     top:0px;
     z-index:100;
     display:none;

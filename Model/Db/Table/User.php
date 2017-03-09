@@ -101,6 +101,23 @@ class Model_Db_Table_User extends System_Db_Table
         return $result;
         
     }
+    
+    public function delete($params)
+    {
+        $id = $params['id'];
+        
+        try {
+            
+            $sth = $this->getConnection()->prepare('delete from ' . $this->getName() . ' where id=' . $id);
+            $result = $sth->execute();
+            
+        } catch (PDOException $e) {
+            echo 'Error : ' . $e->getMessage();
+            exit();
+        }
+
+        return $result;
+    }
 
     /**
      * 

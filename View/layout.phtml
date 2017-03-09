@@ -20,7 +20,7 @@ if ($userId) {
             <header>
                 <div class="container">
                     <div class="logo">
-                        <a href="/">InetShop</a>
+                        <a href="/"><span class="mainlogo">InetShop</span><span class="slogan">for programmers</span></a>
                     </div>
                     <menu id="mainmenu">
                         <ul>
@@ -67,6 +67,18 @@ if ($userId) {
             <footer class="footer">
                 <span>&copy; <a href="/">InetShop</a> 2017. All Rights Reserved.</span>
             </footer>
+            
+            <div class="popup" id="popup">
+                <div class="popup-content">
+                    <p class="popup-info">Вы уверены?</p>
+                    <div>
+                        <a class="close insert yes" href="#">Да</a>
+                        <a class="close insert ok hide" href="#">Ok</a>
+                        <a class="close insert no" href="#">Нет</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </body>
 

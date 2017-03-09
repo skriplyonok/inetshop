@@ -72,11 +72,15 @@ $user = $view->getParam('user');
             <p>
                 <input placeholder="Возраст" type="text" name="year" maxlength="20" value="<?php echo $user->year; ?>"/><br />
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                <input placeholder="Фото" type="file" name="photo" maxlength="30" value="<?php echo $user->photo; ?>"/><br />
+                <div class="file-upload">
+                    <button type="button">Выбрать</button>
+                    <div>Файл не выбран</div>
+                    <input type="file" name="photo">
+                </div>
             </p>     
             <input type="submit" name="insert" value="Сохранить" />
         </form>
-        <p class="submitInfo"><?php 
+        <p class="submitInfo"><?php
             if($is_save)
             {
                 echo 'Сохранено!';
