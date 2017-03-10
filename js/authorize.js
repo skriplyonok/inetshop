@@ -83,9 +83,8 @@ $(document).ready(function() {
 
     $('.file-upload input[type=file]').change(function (e) {
         var str = $(this).val();
-        var name = str/*.slice(str.lastIndexOf('\\') + 1)*/;
+        var name = str.slice(str.lastIndexOf('\\') + 1);
         $('.file-upload > div').html(name);
-        $('.file-upload > div').css('color', '#000');
     });
 
     var id = 0;

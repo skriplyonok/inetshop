@@ -137,7 +137,7 @@ abstract class System_Controller
         if (!(move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile))) {
             echo "Ошибка загрузки!\n";
         }
-        return $relativefile;
+        return DS . $relativefile;
     }
 
 }

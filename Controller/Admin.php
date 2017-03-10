@@ -41,12 +41,9 @@ class Controller_Admin extends System_Controller
     public function saveAction()
     {
         $this->isAdmin();
-        
-
-        
+      
         $params = $this->prepareParams();
         
-        //$params = $this->getParams();
         
         $userModel  = new Model_User();
         try {
