@@ -105,7 +105,7 @@ class Model_User
     public static function getAllUser()
     {
         $dbUser     =  new Model_Db_Table_User();
-        $userData = $dbUser->getAllUser();
+        $userData = $dbUser->getAll();
         
         if(!empty($userData))
         {
