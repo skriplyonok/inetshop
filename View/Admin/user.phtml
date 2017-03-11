@@ -1,8 +1,9 @@
 <?php
 /**
- * @var Model_User $user
+ * @var Model
  */
-$user = $view->getParam('allUser');
+$user = $view->getParam('all');
+$table = $view->getParam('table');
 ?>
 
 <ul class="adminMenu">
@@ -19,7 +20,7 @@ $user = $view->getParam('allUser');
         <thead>
             <tr>
                 <th>   
-                <a class="insert" href="/admin/insert">Добавить</a>Код</th>    
+                    <a class="insert" href="/admin/insert/table/<?php echo $table; ?>">Добавить</a>Код</th>    
                 <th>Имя</th>    
                 <th>Фамилия</th>    
                 <th>Почта</th> 
@@ -42,8 +43,8 @@ $user = $view->getParam('allUser');
                 <td><?php echo $value->role_id; ?></td>
                 <td><?php echo $value->year; ?></td>
                 <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
-                <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit"></td>
-                <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete"></td>
+                <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
             </tr>
             <?php } ?>
         </tbody>

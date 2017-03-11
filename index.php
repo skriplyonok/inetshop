@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 
 define('DS', DIRECTORY_SEPARATOR);
 // Узнаём путь к файлам сайта
-$site_path = realpath(dirname(__FILE__) . DS) . DS;
-define('SITE_PATH', $site_path);
+$sitePath = realpath(dirname(__FILE__) . DS);
+define('SITE_PATH', $sitePath);
 
 $config = file_get_contents(SITE_PATH . DS . 'config.xml');
 
@@ -56,7 +56,7 @@ function loadClass($className)
 try {
     System_Registry :: set('connection', $db);
     $router = new System_Router();
-    $router->setPath(SITE_PATH . 'Controller');
+    $router->setPath('Controller');
     $router->start();
 }
 catch(Exception $e) {

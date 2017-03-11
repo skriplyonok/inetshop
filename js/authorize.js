@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     $('input.edit').click(function(e){
         e.preventDefault();
-        window.location = '/admin/update/id/' + $(this).attr('data-id');
+        window.location = '/admin/update/id/' + $(this).attr('data-id') + '/table/' + $(this).attr('data-table');
     });
 
     $('.file-upload input[type=file]').change(function (e) {
@@ -88,10 +88,12 @@ $(document).ready(function() {
     });
 
     var id = 0;
+    var table = "";
 
     $('body').on('click', 'input.delete', function (e) {
         e.preventDefault();
         id = $(this).attr("data-id");
+        table = $(this).attr("data-table");
         $("#popup").show();
  
     });
@@ -103,9 +105,8 @@ $(document).ready(function() {
     
     $('a.yes').click(function (e) {
         e.preventDefault();
-
         $.post(
-                '/admin/delete',
+                '/admin/delete' + '/table/' + table,
                 {
                     id: id
                 },

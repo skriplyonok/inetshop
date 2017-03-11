@@ -2,36 +2,48 @@
 
 class Controller_Admin extends System_Controller
 {
-    
+
+    public function __construct($action = '') {
+        parent::__construct();
+        $this->isAdmin();
+        if($action)
+        {   
+            $this->_tableName = substr($action, 0, -6);
+            $this->_modelName = 'Model_' . ucfirst($this->_tableName);
+        }
+    }
     public function indexAction()
     {
-        $this->isAdmin();
+        
     }
     public function userAction()
     {
-        $this->isAdmin();
+               
         try {
-            $allUser = Model_User :: getAllUser();
-            $this->view->setParam('allUser', $allUser);
+            $modelName = $this->_modelName;
+            $all = $modelName :: getAll();
+            $this->view->setParam('all', $all);
+            $this->view->setParam('table', $this->_tableName);
         }
         catch(Exception $e) {
             $this->view->setParam('error', $e->getMessage());
         }
     }
     public function insertAction()
-    {
-        $this->isAdmin();
+    {     
+            $this->view->setParam('table', $this->_tableName);
     }
     public function updateAction()
     {
-        $this->isAdmin();
         
         $args = $this->getArgs();
-        $userId = $args['id'];
-       
+        $id = $args['id'];
+        
         try {
-            $modelUser = Model_User :: getById($userId);
-            $this->view->setParam('user', $modelUser);
+            $modelName = $this->_modelName;
+            $model = $modelName :: getById($id);
+            $this->view->setParam('model', $model);
+            $this->view->setParam('table', $this->_tableName);
         }
         catch(Exception $e) {
             $this->view->setParam('error', $e->getMessage());
@@ -40,20 +52,19 @@ class Controller_Admin extends System_Controller
 
     public function saveAction()
     {
-        $this->isAdmin();
       
         $params = $this->prepareParams();
         
-        
-        $userModel  = new Model_User();
+        $modelName = $this->_modelName;
+        $model  = new $modelName();
         try {
             if(!empty($params['id']))
             {
                 $this->view->setParam('mode', Model_User::MODE_UPDATE);
-                $userId = $userModel->register($params, Model_User::MODE_UPDATE);
+                $id = $model->register($params, Model_User::MODE_UPDATE);
             }else{
                 $this->view->setParam('mode', Model_User::MODE_INSERT);
-                $userId     = $userModel->register($params);
+                $id     = $model->register($params);
             }
            
             $this->view->setParam('is_save', true);
@@ -61,17 +72,19 @@ class Controller_Admin extends System_Controller
         catch(Exception $e) {
             $this->view->setParam('error', $e->getMessage());
         }
+        $this->view->setParam('table', $this->_tableName);
        
     }
     
     public function deleteAction() 
     {
-        $this->isAdmin();
+
         $params = $this->getParams();
-        $userModel  = new Model_Db_Table_User();
+        $modelName = 'Model_Db_Table_' . ucfirst($this->_tableName);
+        $model  = new $modelName();
         try {
             
-            $result = $userModel->delete($params);
+            $result = $model->delete($params);
             
             if($result)
             {

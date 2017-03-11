@@ -1,7 +1,8 @@
 <?php
 $is_save = $view->getParam('is_save');
 $error = $view->getParam('error');
-$user = $view->getParam('user');
+$model = $view->getParam('model');
+$table = $view->getParam('table');
 ?>
 
 <ul class="adminMenu">
@@ -13,7 +14,7 @@ $user = $view->getParam('user');
 <div class="content">
     <h1>Администрирование</h1>
     <h2>Изменение клиента</h2>
-    <?php if($user) : ?>
+    <?php if($model) : ?>
     <table>  
         <thead>
             <tr>
@@ -30,15 +31,15 @@ $user = $view->getParam('user');
         </thead>
         <tbody>
             <tr>
-                <td><?php echo $user->id; ?></td>
-                <td><?php echo $user->name; ?></td>
-                <td><?php echo $user->lastName; ?></td>
-                <td><?php echo $user->email; ?></td>
-                <td><?php echo $user->isActive; ?></td>
-                <td><?php echo $user->skills; ?></td>
-                <td><?php echo $user->role_id; ?></td>
-                <td><?php echo $user->year; ?></td>
-                <td><?php echo $user->photo; ?></td>
+                <td><?php echo $model->id; ?></td>
+                <td><?php echo $model->name; ?></td>
+                <td><?php echo $model->lastName; ?></td>
+                <td><?php echo $model->email; ?></td>
+                <td><?php echo $model->isActive; ?></td>
+                <td><?php echo $model->skills; ?></td>
+                <td><?php echo $model->role_id; ?></td>
+                <td><?php echo $model->year; ?></td>
+                <td><img class="photo" src="<?php echo $model->photo; ?>" alt="photo"></td>
             </tr>
         </tbody>
     </table>
@@ -48,12 +49,12 @@ $user = $view->getParam('user');
     <?php endif; ?>
         
     <div class="formwrapper">
-        <form <?php if ($is_save) { echo 'class="hide"'; } ?> name="insert" action="/admin/save" enctype="multipart/form-data" method="POST" autocomplete="off">
+        <form <?php if ($is_save) { echo 'class="hide"'; } ?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
             <p>
-                <input type="hidden" name="id" value="<?php echo $user->id; ?>">
-                <input placeholder="Имя" type="text" name="first_name" maxlength="20" value="<?php echo $user->name; ?>"/><br />
-                <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" value="<?php echo $user->lastName; ?>"/><br />
-                <input placeholder="Почта" type="text" name="email" maxlength="20" value="<?php echo $user->email; ?>"/><br /> 
+                <input type="hidden" name="id" value="<?php echo $model->id; ?>">
+                <input placeholder="Имя" type="text" name="first_name" maxlength="20" value="<?php echo $model->name; ?>"/><br />
+                <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" value="<?php echo $model->lastName; ?>"/><br />
+                <input placeholder="Почта" type="text" name="email" maxlength="20" value="<?php echo $model->email; ?>"/><br /> 
             </p>
             <p class="checkbox">
                 <input id="PHP" type="checkbox" name="skills[]" value="PHP"><label for="PHP">PHP</label>
@@ -70,7 +71,7 @@ $user = $view->getParam('user');
                 <input id="role7" type="radio" name="role_id" value="7"><label for="role7">Супер клиент</label>
             </p>
             <p>
-                <input placeholder="Возраст" type="text" name="year" maxlength="20" value="<?php echo $user->year; ?>"/><br />
+                <input placeholder="Возраст" type="text" name="year" maxlength="20" value="<?php echo $model->year; ?>"/><br />
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
                 <div class="file-upload">
                     <button type="button">Выбрать</button>

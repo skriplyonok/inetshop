@@ -45,8 +45,8 @@ class System_Router
         // Создаём экземпляр контроллера
         $class = 'Controller_' . $controllerName;
         
-        
-        $controller = new $class();
+       
+        $controller = new $class($action);
         $controller->setArgs($args);
              
         // Действие доступно?

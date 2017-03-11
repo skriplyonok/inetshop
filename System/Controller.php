@@ -20,10 +20,20 @@ abstract class System_Controller
      * @var int
      */
     protected $_userId;
+    
+    protected $_tableName;
+    
+    protected $_modelName;
 
 
     public function setArgs($args)
     {
+        if(in_array('table', $args) )
+        {           
+            $this->_tableName = array_pop($args);
+            $this->_modelName = 'Model_' . ucfirst($this->_tableName);
+            array_pop($args);
+        }
         $this->args = $args;
     }
     
@@ -39,7 +49,6 @@ abstract class System_Controller
         {
             $tempArgs[$this->args[$i]] = $this->args[$i+1];
         }
-        //$this->args=$tempArgs;
         return $tempArgs;
     }
     public function __construct() {
@@ -133,7 +142,7 @@ abstract class System_Controller
         }
         $relativedir = 'upload' . DS;
         $relativefile = $relativedir . basename($_FILES['photo']['name']);
-        $uploadfile = SITE_PATH . $relativefile;
+        $uploadfile = SITE_PATH . DS . $relativefile;
         if (!(move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile))) {
             echo "Ошибка загрузки!\n";
         }

@@ -102,7 +102,7 @@ class Model_User
             throw new Exception('User not found', System_Exception::NOT_FOUND);
         }
     }
-    public static function getAllUser()
+    public static function getAll()
     {
         $dbUser     =  new Model_Db_Table_User();
         $userData = $dbUser->getAll();
