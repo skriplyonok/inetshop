@@ -56,7 +56,8 @@ class System_Router
        
         call_user_func(array($controller, $action));
         
-        $viewFileName = 'View' . DS . $controllerName . DS . substr($action, 0, -6) . '.phtml';
+        $viewNameSection = 'View' . DS . $controllerName . DS . $controllerName . '.phtml';
+        $viewNamePage = 'View' . DS . $controllerName . DS . substr($action, 0, -6) . '.phtml';
 
         /**
          * @var System_View $view

@@ -6,16 +6,8 @@ $user = $view->getParam('all');
 $table = $view->getParam('table');
 ?>
 
-<ul class="adminMenu">
-    <li><a href="/admin/user">Клиенты</a></li>
-    <li><a href="/admin/product">Товары</a></li>
-    <li><a href="/admin/order">Заказы</a></li>
-</ul>
-
-<div class="content">
-    <h1>Администрирование</h1>
-    <h2>Клиенты</h2>
-    <?php if($user) : ?>
+<h2>Клиенты</h2>
+<?php if ($user) : ?>
     <table>  
         <thead>
             <tr>
@@ -32,26 +24,26 @@ $table = $view->getParam('table');
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($user as $value){ ?>
-            <tr>
-                <td><?php echo $value->id; ?></td>
-                <td><?php echo $value->name; ?></td>
-                <td><?php echo $value->lastName; ?></td>
-                <td><?php echo $value->email; ?></td>
-                <td><?php echo $value->isActive; ?></td>
-                <td><?php echo $value->skills; ?></td>
-                <td><?php echo $value->role_id; ?></td>
-                <td><?php echo $value->year; ?></td>
-                <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
-                <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
-                <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
-            </tr>
+            <?php foreach ($user as $value) { ?>
+                <tr>
+                    <td><?php echo $value->id; ?></td>
+                    <td><?php echo $value->name; ?></td>
+                    <td><?php echo $value->lastName; ?></td>
+                    <td><?php echo $value->email; ?></td>
+                    <td><?php echo $value->isActive; ?></td>
+                    <td><?php echo $value->skills; ?></td>
+                    <td><?php echo $value->role_id; ?></td>
+                    <td><?php echo $value->year; ?></td>
+                    <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
+                    <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                    <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>
 
-    <?php  elseif($view->getParam('error')) : ?>
-        <div class="error"><h1><?php echo $view->getParam('error')?></h1></div>
-    <?php endif; ?>
-</div>
+<?php elseif ($view->getParam('error')) : ?>
+    <div class="error"><h1><?php echo $view->getParam('error') ?></h1></div>
+<?php endif; ?>
+
 

@@ -5,43 +5,38 @@
 $user = $view->getParam('user');
 ?>
 
-<div class="content">
+<?php if ($user) : ?>
 
-    <h1>Профиль пользователя</h1>
+    <table>  
+        <thead>
+            <tr>
+                <th>Код</th>    
+                <th>Имя</th>    
+                <th>Фамилия</th>    
+                <th>Почта</th> 
+                <th>Активность</th> 
+                <th>Навыки</th> 
+                <th>Роль</th> 
+                <th>Возраст</th> 
+                <th>Фото</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?php echo $user->id; ?></td>
+                <td><?php echo $user->name; ?></td>
+                <td><?php echo $user->lastName; ?></td>
+                <td><?php echo $user->email; ?></td>
+                <td><?php echo $user->isActive; ?></td>
+                <td><?php echo $user->skills; ?></td>
+                <td><?php echo $user->role_id; ?></td>
+                <td><?php echo $user->year; ?></td>
+                <td><img class="photo" src="<?php echo $user->photo; ?>" alt="photo"></td>
+            </tr>
+        </tbody>
+    </table>
 
-    <?php if ($user) : ?>
+<?php elseif ($view->getParam('error')) : ?>
+    <div class="error"><h1><?php echo $view->getParam('error') ?></h1></div>
+<?php endif; ?>
 
-        <table>  
-            <thead>
-                <tr>
-                    <th>Код</th>    
-                    <th>Имя</th>    
-                    <th>Фамилия</th>    
-                    <th>Почта</th> 
-                    <th>Активность</th> 
-                    <th>Навыки</th> 
-                    <th>Роль</th> 
-                    <th>Возраст</th> 
-                    <th>Фото</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><?php echo $user->id; ?></td>
-                    <td><?php echo $user->name; ?></td>
-                    <td><?php echo $user->lastName; ?></td>
-                    <td><?php echo $user->email; ?></td>
-                    <td><?php echo $user->isActive; ?></td>
-                    <td><?php echo $user->skills; ?></td>
-                    <td><?php echo $user->role_id; ?></td>
-                    <td><?php echo $user->year; ?></td>
-                    <td><img class="photo" src="<?php echo $user->photo; ?>" alt="photo"></td>
-                </tr>
-            </tbody>
-        </table>
-
-    <?php elseif ($view->getParam('error')) : ?>
-        <div class="error"><h1><?php echo $view->getParam('error') ?></h1></div>
-            <?php endif; ?>
-
-</div>
