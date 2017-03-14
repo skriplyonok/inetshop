@@ -33,6 +33,7 @@ abstract class System_Db_Table
     
     public function getAll()
     {
+       
         $sql    = 'select * from ' . $this->getTable();
         
         $sth    = $this->getConnection()->prepare($sql);
@@ -62,8 +63,10 @@ abstract class System_Db_Table
      */
         public function create($params)
     {
-        
+        $fields = $this->_getFields();             
         $arrayAllFields = array_keys($params);
+        $arrayAllFields = array_intersect($arrayAllFields, $fields);
+
         $arraySetFields = array();
         $arrayData = array();
         foreach($arrayAllFields as $field){
@@ -91,10 +94,8 @@ abstract class System_Db_Table
             exit();
         }
         
-        if($result)
-        {
-            return $this->getConnection()->lastInsertId();          
-        }
+        return $result;          
+
     }
     
     public function update($params) 
@@ -131,11 +132,27 @@ abstract class System_Db_Table
         
     public function delete($params)
     {
-        $id = $params['id'];
-        
+        $fields = $this->_getFields();             
+        $arrayAllFields = array_keys($params);
+        $arrayAllFields = array_intersect($arrayAllFields, $fields);
+
+        $arraySetFields = array();
+        $arrayData = array();
+        foreach($arrayAllFields as $field){
+            if(!empty($params[$field]) && $field != 'route' && $field != 'save'){
+                $arraySetFields[] = $field;
+                if($field == 'password')
+                {
+                    $arrayData[] = sha1($params[$field]);
+                } else {
+                    $arrayData[] = $params[$field];
+                }
+            }
+        }
+               
         try {
             
-            $sth = $this->getConnection()->prepare('delete from ' . $this->getTable() . ' where id=' . $id);
+            $sth = $this->getConnection()->prepare('delete from ' . $this->getTable() . ' where ' . $arraySetFields[0] . '="' . $arrayData[0] . '"');
             $result = $sth->execute();
             
         } catch (PDOException $e) {
@@ -144,6 +161,19 @@ abstract class System_Db_Table
         }
 
         return $result;
+    }
+    private function _getFields()
+    {
+        $dbh    = $this->getConnection();
+        $sth = $dbh->prepare('SHOW COLUMNS FROM ' . $this->getTable());
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute();
+        $fields = [];
+        while($row = $sth->fetch()) {
+            $fields[] = $row['Field'];
+        }
+        $sth = null;
+        return $fields;
     }
 }
 

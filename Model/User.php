@@ -134,7 +134,7 @@ class Model_User
     {   
 
         if(!$this->_validate($params, $mode))
-    {        
+        {        
             throw new Exception('The entered data is invalid', System_Exception::VALIDATE_ERROR);
         }
         

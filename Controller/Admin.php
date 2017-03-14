@@ -16,9 +16,9 @@ class Controller_Admin extends System_Controller
     {
         
     }
+    
     public function userAction()
-    {
-               
+    {          
         try {
             $modelName = $this->_modelName;
             $all = $modelName :: getAll();
@@ -29,6 +29,20 @@ class Controller_Admin extends System_Controller
             $this->view->setParam('error', $e->getMessage());
         }
     }
+    
+    public function productAction()
+    {   
+        try {
+            $modelName = $this->_modelName;
+            $all = $modelName :: getAll();
+            $this->view->setParam('all', $all);
+            $this->view->setParam('table', $this->_tableName);
+        }
+        catch(Exception $e) {
+            $this->view->setParam('error', $e->getMessage());
+        }
+    }
+    
     public function insertAction()
     {     
             $this->view->setParam('table', $this->_tableName);
@@ -54,22 +68,19 @@ class Controller_Admin extends System_Controller
     {
       
         $params = $this->prepareParams();
-        
+
         $modelName = $this->_modelName;
-        $model  = new $modelName();
+        $model = new $modelName();
         try {
-            if(!empty($params['id']))
-            {
+            if (!empty($params['sku'])) {
                 $this->view->setParam('mode', Model_User::MODE_UPDATE);
                 $id = $model->register($params, Model_User::MODE_UPDATE);
-            }else{
+            } else {
                 $this->view->setParam('mode', Model_User::MODE_INSERT);
-                $id     = $model->register($params);
+                $id = $model->register($params);
             }
-           
             $this->view->setParam('is_save', true);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $this->view->setParam('error', $e->getMessage());
         }
         $this->view->setParam('table', $this->_tableName);
@@ -80,6 +91,8 @@ class Controller_Admin extends System_Controller
     {
 
         $params = $this->getParams();
+        
+        $table = $this->_tableName;
         $modelName = 'Model_Db_Table_' . ucfirst($this->_tableName);
         $model  = new $modelName();
         try {
@@ -88,7 +101,7 @@ class Controller_Admin extends System_Controller
             
             if($result)
             {
-                echo json_encode(array('result' => 'Удалено!'));
+                echo json_encode(array('result' => 'Удалено!', 'table' => $table));
                 die(); 
             }
             throw new Exception('Ошибка!');

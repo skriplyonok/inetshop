@@ -1,0 +1,43 @@
+<?php
+/**
+ * @var Model
+ */
+$model = $view->getParam('all');
+$table = $view->getParam('table');
+
+?>
+
+<h2>Товары</h2>
+<?php if ($model) : ?>
+    <table>  
+        <thead>
+            <tr>
+                <th>   
+                    <a class="insert" href="/admin/insert/table/<?php echo $table; ?>">Добавить</a>Код</th>    
+                <th>Код</th>    
+                <th>Название</th>    
+                <th>Описание</th> 
+                <th>Фото</th> 
+                <th>Цена</th> 
+                <th>Остаток</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($model as $value) { ?>
+                <tr>
+                    <td><?php echo $value->sku; ?></td>
+                    <td><?php echo $value->name; ?></td>
+                    <td><?php echo $value->description; ?></td>
+                    <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
+                    <td><?php echo $value->price; ?></td>
+                    <td><?php echo $value->total; ?></td>
+                    <td><input type="button" data-id="<?php echo $value->sku; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                    <td><input type="button" data-id="<?php echo $value->sku; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+<?php elseif ($view->getParam('error')) : ?>
+    <div class="error"><h1><?php echo $view->getParam('error') ?></h1></div>
+<?php endif; ?>

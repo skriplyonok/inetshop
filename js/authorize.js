@@ -87,7 +87,7 @@ $(document).ready(function() {
         $('.file-upload > div').html(name);
     });
 
-    var id = 0;
+    var id;
     var table = "";
 
     $('body').on('click', 'input.delete', function (e) {
@@ -105,11 +105,18 @@ $(document).ready(function() {
     
     $('a.yes').click(function (e) {
         e.preventDefault();
+        var data = {
+            id: id
+        }
+        if(table == 'product')
+        {
+            data = {
+                SKU: id
+            }
+        }
         $.post(
                 '/admin/delete' + '/table/' + table,
-                {
-                    id: id
-                },
+                data,
                 function (data) {
                     if (data.error !== undefined) {
                         $('.popup-info').html(data.error);
@@ -118,6 +125,7 @@ $(document).ready(function() {
                         $('a.ok').toggleClass('hide');
                         $('a.yes').hide();
                         $('a.no').hide();
+                        table = data.table;
                     }
                 },
                 'json'
@@ -127,7 +135,7 @@ $(document).ready(function() {
     
     $('a.ok').click(function(e){
         e.preventDefault();
-        window.location = '/admin/user';
+        window.location = '/admin/' + table;
     });
 
 
