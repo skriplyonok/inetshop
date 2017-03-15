@@ -3,78 +3,25 @@ $is_save = $view->getParam('is_save');
 $error = $view->getParam('error');
 $model = $view->getParam('model');
 $table = $view->getParam('table');
+$update = $action == 'updateAction' ? true : false;
 ?>
 
 <h2>Изменение</h2>
-<?php if ($model) : ?>
-    <table>  
-        <thead>
-            <tr>
-                <th>Код</th>    
-                <th>Имя</th>    
-                <th>Фамилия</th>    
-                <th>Почта</th> 
-                <th>Активность</th> 
-                <th>Навыки</th> 
-                <th>Роль</th> 
-                <th>Возраст</th> 
-                <th>Фото</th> 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><?php echo $model->id; ?></td>
-                <td><?php echo $model->name; ?></td>
-                <td><?php echo $model->lastName; ?></td>
-                <td><?php echo $model->email; ?></td>
-                <td><?php echo $model->isActive; ?></td>
-                <td><?php echo $model->skills; ?></td>
-                <td><?php echo $model->role_id; ?></td>
-                <td><?php echo $model->year; ?></td>
-                <td><img class="photo" src="<?php echo $model->photo; ?>" alt="photo"></td>
-            </tr>
-        </tbody>
-    </table>
+<?php 
+    if ($model) : 
+        
+        include $viewNameTable;
 
-<?php elseif ($view->getParam('error')) : ?>
+    elseif ($view->getParam('error')) : ?>
     <div class="error"><?php echo $view->getParam('error') ?></div>
 <?php endif; ?>
 
 <div class="formwrapper">
-    <form <?php if ($is_save) {
-    echo 'class="hide"';
-} ?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
-        <p>
-            <input type="hidden" name="id" value="<?php echo $model->id; ?>">
-            <input placeholder="Имя" type="text" name="first_name" maxlength="20" value="<?php echo $model->name; ?>"/><br />
-            <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" value="<?php echo $model->lastName; ?>"/><br />
-            <input placeholder="Почта" type="text" name="email" maxlength="20" value="<?php echo $model->email; ?>"/><br /> 
-        </p>
-        <p class="checkbox">
-            <input id="PHP" type="checkbox" name="skills[]" value="PHP"><label for="PHP">PHP</label>
-            <input id="CSS" type="checkbox" name="skills[]" value="CSS"><label for="CSS">CSS</label>
-            <input id="Javascript" type="checkbox" name="skills[]" value="Javascript"><label for="Javascript">Javascript</label>
-            <input id="Java" type="checkbox" name="skills[]" value="Java"><label for="Java">Java</label>
-            <input id="HTML" type="checkbox" name="skills[]" value="HTML"><label for="HTML">HTML</label>
-            <input id="Web-design" type="checkbox" name="skills[]" value="Web-design"><label for="Web-design">Web-design</label>
-        </p>
-        <p class="checkbox">
-            <input id="role2" type="radio" name="role_id" value="2"><label for="role2">Простой клиент</label>
-            <input id="role5" type="radio" name="role_id" value="5"><label for="role5">Администратор</label>
-            <input id="role6" type="radio" name="role_id" value="6"><label for="role6">Продвинутый клиент</label>
-            <input id="role7" type="radio" name="role_id" value="7"><label for="role7">Супер клиент</label>
-        </p>
-        <p>
-            <input placeholder="Возраст" type="text" name="year" maxlength="20" value="<?php echo $model->year; ?>"/><br />
-            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-        <div class="file-upload">
-            <button type="button">Выбрать</button>
-            <div>Файл не выбран</div>
-            <input type="file" name="photo">
-        </div>
-        </p>     
-        <input type="submit" name="insert" value="Сохранить" />
-    </form>
+    
+    <?php 
+        include $viewNameForm;
+    ?>
+    
     <p class="submitInfo"><?php
         if ($is_save) {
             echo 'Сохранено!';

@@ -1,0 +1,52 @@
+<?php if(!$update) echo '<h2>Клиенты</h2>'; ?>
+<table>  
+    <thead>
+        <tr>
+            <th>
+                <?php if(!$update) echo '<a class="insert" href="/admin/insert/table/' . $table . '">Добавить</a>'; ?>
+                Код
+            </th>
+            <th>Имя</th>    
+            <th>Фамилия</th>    
+            <th>Почта</th> 
+            <th>Активность</th> 
+            <th>Навыки</th> 
+            <th>Роль</th> 
+            <th>Возраст</th> 
+            <th>Фото</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(!$update)
+            { 
+                foreach ($model as $value) { ?>
+                    <tr>
+                        <td><?php echo $value->id; ?></td>
+                        <td><?php echo $value->name; ?></td>
+                        <td><?php echo $value->lastName; ?></td>
+                        <td><?php echo $value->email; ?></td>
+                        <td><?php echo $value->isActive; ?></td>
+                        <td><?php echo $value->skills; ?></td>
+                        <td><?php echo $value->role_id; ?></td>
+                        <td><?php echo $value->year; ?></td>
+                        <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
+                        <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                        <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
+                    </tr>
+            <?php      }
+            }else{    
+            ?>
+                    <tr>
+                        <td><?php echo $model->id; ?></td>
+                        <td><?php echo $model->name; ?></td>
+                        <td><?php echo $model->lastName; ?></td>
+                        <td><?php echo $model->email; ?></td>
+                        <td><?php echo $model->isActive; ?></td>
+                        <td><?php echo $model->skills; ?></td>
+                        <td><?php echo $model->role_id; ?></td>
+                        <td><?php echo $model->year; ?></td>
+                        <td><img class="photo" src="<?php echo $model->photo; ?>" alt="photo"></td>
+                    </tr>
+            <?php } ?>
+    </tbody>
+</table>

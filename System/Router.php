@@ -57,12 +57,16 @@ class System_Router
         call_user_func(array($controller, $action));
         
         $viewNameSection = 'View' . DS . $controllerName . DS . $controllerName . '.phtml';
+        
         $viewNamePage = 'View' . DS . $controllerName . DS . substr($action, 0, -6) . '.phtml';
-
+        
         /**
          * @var System_View $view
          */
         $view = $controller->view;
+        
+        $viewNameTable = 'View' . DS . $controllerName . DS . 'Table' . DS . $view->getParam('table') . '.phtml';
+        $viewNameForm = 'View' . DS . $controllerName . DS . 'Form' . DS . $view->getParam('table') . '.phtml';
         
         $layoutFileName = 'View' . DS . 'layout.phtml';
         

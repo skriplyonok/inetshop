@@ -154,6 +154,7 @@ class Model_User
         else {
             if($mode === Model_User::MODE_UPDATE)
             {
+
                 $res = $tableUser->update($params);
             }else{
                 $res = $tableUser->create($params);   

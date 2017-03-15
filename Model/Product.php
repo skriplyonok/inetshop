@@ -47,11 +47,10 @@ class Model_Product
     {
         $db     =  new Model_Db_Table_Product();
         $data = $db->getById($id)[0];
-        //$userData   =  !empty($userData[0]) ? array_shift($dbUser->getById($userId)) : '';
         
         if(!empty($data)) {
             $model  = new self();
-            $model->sku          = $data->sku;
+            $model->sku          = $data->SKU;
             $model->name       = $data->name;
             $model->description       = $data->description;            
             $model->photo       = $data->photo;      
@@ -98,9 +97,11 @@ class Model_Product
         
         $table = new Model_Db_Table_Product();
         
-        $resIfExists = $table->checkIfExists($params);
-
-        
+        if($mode == Model_User::MODE_INSERT)
+        {
+            $resIfExists = $table->checkIfExists($params);           
+        }
+    
         if(!empty($resIfExists)) {
             throw new Exception('Such product is already exists.', System_Exception :: ALREADY_EXISTS);
         }

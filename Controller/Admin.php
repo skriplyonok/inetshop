@@ -17,7 +17,20 @@ class Controller_Admin extends System_Controller
         
     }
     
-    public function userAction()
+//    public function userAction()
+//    {          
+//        try {
+//            $modelName = $this->_modelName;
+//            $all = $modelName :: getAll();
+//            $this->view->setParam('all', $all);
+//            $this->view->setParam('table', $this->_tableName);
+//        }
+//        catch(Exception $e) {
+//            $this->view->setParam('error', $e->getMessage());
+//        }
+//    }
+    
+    public function selectAction()
     {          
         try {
             $modelName = $this->_modelName;
@@ -30,18 +43,18 @@ class Controller_Admin extends System_Controller
         }
     }
     
-    public function productAction()
-    {   
-        try {
-            $modelName = $this->_modelName;
-            $all = $modelName :: getAll();
-            $this->view->setParam('all', $all);
-            $this->view->setParam('table', $this->_tableName);
-        }
-        catch(Exception $e) {
-            $this->view->setParam('error', $e->getMessage());
-        }
-    }
+//    public function productAction()
+//    {   
+//        try {
+//            $modelName = $this->_modelName;
+//            $all = $modelName :: getAll();
+//            $this->view->setParam('all', $all);
+//            $this->view->setParam('table', $this->_tableName);
+//        }
+//        catch(Exception $e) {
+//            $this->view->setParam('error', $e->getMessage());
+//        }
+//    }
     
     public function insertAction()
     {     
@@ -66,13 +79,15 @@ class Controller_Admin extends System_Controller
 
     public function saveAction()
     {
-      
+            
         $params = $this->prepareParams();
 
         $modelName = $this->_modelName;
         $model = new $modelName();
+        
+        $update = array_key_exists('update', $this->getParams()) ? true : false;
         try {
-            if (!empty($params['sku'])) {
+            if ($update) {
                 $this->view->setParam('mode', Model_User::MODE_UPDATE);
                 $id = $model->register($params, Model_User::MODE_UPDATE);
             } else {

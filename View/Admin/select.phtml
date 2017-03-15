@@ -1,0 +1,15 @@
+<?php
+$model = $view->getParam('all');
+$table = $view->getParam('table');
+$update = $action == 'updateAction' ? true : false;
+?>
+
+<?php if ($model)
+{
+    include $viewNameTable;
+}
+elseif ($view->getParam('error')) { ?>
+    <div class="error"><h1><?php echo $view->getParam('error') ?></h1></div>
+<?php } ?>
+
+

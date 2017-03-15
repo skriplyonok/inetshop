@@ -6,63 +6,11 @@ $table = $view->getParam('table');
 
 <h2>Добавление</h2>
 <div class="formwrapper">
-    <form <?php
-if ($is_save || $table != 'user') {
-    echo 'class="hide"';
-}
-?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
-        <p>
-            <input placeholder="Имя" type="text" name="first_name" maxlength="20" /><br />
-            <input placeholder="Фамилия" type="text" name="last_name" maxlength="20" /><br />
-            <input placeholder="Почта" type="text" name="email" maxlength="20" /><br />        
-            <input placeholder="Пароль" type="password" name="password" maxlength="30"/><br />
-        </p>
-        <p class="checkbox">
-            <input id="PHP" type="checkbox" name="skills[]" value="PHP"><label for="PHP">PHP</label>
-            <input id="CSS" type="checkbox" name="skills[]" value="CSS"><label for="CSS">CSS</label>
-            <input id="Javascript" type="checkbox" name="skills[]" value="Javascript"><label for="Javascript">Javascript</label>
-            <input id="Java" type="checkbox" name="skills[]" value="Java"><label for="Java">Java</label>
-            <input id="HTML" type="checkbox" name="skills[]" value="HTML" checked><label for="HTML">HTML</label>
-            <input id="Web-design" type="checkbox" name="skills[]" value="Web-design"><label for="Web-design">Web-design</label>
-        </p>
-        <p class="checkbox">
-            <input id="role2" type="radio" name="role_id" value="2" checked><label for="role2">Простой клиент</label>
-            <input id="role5" type="radio" name="role_id" value="5"><label for="role5">Администратор</label>
-            <input id="role6" type="radio" name="role_id" value="6"><label for="role6">Продвинутый клиент</label>
-            <input id="role7" type="radio" name="role_id" value="7"><label for="role7">Супер клиент</label>
-        </p>
-        <p>
-            <input placeholder="Возраст" type="text" name="year" maxlength="20" /><br />
-            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-        <div class="file-upload">
-            <button type="button">Выбрать</button>
-            <div>Файл не выбран</div>
-            <input type="file" name="photo">
-        </div>
-        </p>     
-        <input type="submit" name="insert" value="Сохранить" />
-    </form>
     
-    <form <?php
-        if ($is_save || $table != 'product') {
-            echo 'class="hide"';
-        }
-        ?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
-        <p>
-            <input placeholder="Код" type="text" name="SKU" maxlength="20" /><br />
-            <input placeholder="Название" type="text" name="name" maxlength="20" /><br />
-            <input placeholder="Описание" type="text" name="description" maxlength="20" /><br />        
-            <input placeholder="Цена" type="text" name="price" maxlength="30"/><br />
-            <input placeholder="Остаток" type="text" name="total" maxlength="20" /><br />
-            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-            <div class="file-upload">
-                <button type="button">Выбрать</button>
-                <div>Файл не выбран</div>
-                <input type="file" name="photo">
-            </div>
-        </p>     
-        <input type="submit" name="insert" value="Сохранить" />
-    </form>
+<?php 
+    include $viewNameForm;
+?>
+    
     <p class="submitInfo"><?php
         if ($is_save) {
             echo 'Сохранено!';

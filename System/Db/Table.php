@@ -33,20 +33,27 @@ abstract class System_Db_Table
     
     public function getAll()
     {
-       
-        $sql    = 'select * from ' . $this->getTable();
+        
+        $sql    = 'select * from `' . $this->getTable() . '`';
         
         $sth    = $this->getConnection()->prepare($sql);
         
         $sth->execute();
         
         $result = $sth->fetchAll(PDO::FETCH_OBJ);
-                       
+        
         return $result;       
     }
     public function getById($id)
     {
-        $sql    = 'select * from ' . $this->getTable() . ' where id = ?';
+        $table = $this->getTable();
+        
+        $sql    = 'select * from ' . $table . ' where id = ?';
+        
+        if($table == 'product')
+        {
+            $sql    = 'select * from ' . $table . ' where SKU = ?';
+        }
         
         $sth    = $this->getConnection()->prepare($sql);
         
@@ -100,12 +107,14 @@ abstract class System_Db_Table
     
     public function update($params) 
     {
-
+        $col = $this->_getFields();             
         $arrayAllFields = array_keys($params);
+        $arrayAllFields = array_intersect($arrayAllFields, $col);
+
         $arraySetFields = array();
         $arrayData = array();
         foreach ($arrayAllFields as $field) {
-            if (!empty($params[$field]) && $field != 'route' && $field != 'save' && $field != 'id') {
+            if (!empty($params[$field]) && $field != 'route' && $field != 'save' && $field != 'id' && $field != 'SKU') {
                 $arraySetFields[] = $field;
                 if ($field == 'password') {
                     $arrayData[] = sha1($params[$field]);
@@ -114,11 +123,18 @@ abstract class System_Db_Table
                 }
             }
         }
-        $arrayData[] = $params['id'];;
+
         $forQueryPlace = implode('=?, ', $arraySetFields);
-        $forQueryPlace = $forQueryPlace . '=? where id=?';
-        
-   
+        if($this->getTable() == 'product')
+        {
+            $arrayData[] = $params['SKU'];        
+            $forQueryPlace = $forQueryPlace . '=? where SKU=?';
+        }else{
+            $arrayData[] = $params['id'];
+            $forQueryPlace = $forQueryPlace . '=? where id=?';            
+        }
+      
+  
         try {
             $sth = $this->getConnection()->prepare('update ' . $this->getTable() . ' set ' . $forQueryPlace);
 

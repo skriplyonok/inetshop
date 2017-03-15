@@ -1,0 +1,20 @@
+<form <?php
+if ($is_save) {
+    echo 'class="hide"';
+}
+?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
+    <p>
+        <input placeholder="Код" type="text" name="SKU" maxlength="20" /><br />
+        <input placeholder="Название" type="text" name="name" maxlength="20" /><br />
+        <input placeholder="Описание" type="text" name="description" maxlength="20" /><br />        
+        <input placeholder="Цена" type="text" name="price" maxlength="30"/><br />
+        <input placeholder="Остаток" type="text" name="total" maxlength="20" /><br />
+        <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+    <div class="file-upload">
+        <button type="button">Выбрать</button>
+        <div>Файл не выбран</div>
+        <input type="file" name="photo">
+    </div>
+</p>     
+<input type="submit" name="insert" value="Сохранить" />
+</form>
