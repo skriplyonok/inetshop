@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`),
   KEY `FK_order_user` (`user_id`),
   CONSTRAINT `FK_order_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы shop2.order: ~13 rows (приблизительно)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
@@ -41,7 +41,11 @@ INSERT INTO `order` (`id`, `user_id`, `date`, `sum`) VALUES
 	(37, 5, '2016-12-13', 470.00),
 	(38, 16, '2016-12-11', 470.00),
 	(39, 16, '2016-12-22', 2100.00),
-	(40, 2, '2016-12-21', 5716.00);
+	(40, 2, '2016-12-21', 5716.00),
+	(41, 117, '2017-03-15', 1500.00),
+	(45, 2, '2017-03-16', 1000.00),
+	(48, 2, '2017-03-14', 0.00),
+	(50, 2, '0000-00-00', 0.00);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 
@@ -91,24 +95,40 @@ CREATE TABLE IF NOT EXISTS `product` (
   `SKU` varchar(50) NOT NULL,
   `name` char(250) NOT NULL,
   `description` text NOT NULL,
-  `img` char(100) NOT NULL,
+  `photo` char(100) NOT NULL,
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   `total` smallint(6) unsigned NOT NULL,
   PRIMARY KEY (`SKU`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы shop2.product: ~10 rows (приблизительно)
+-- Дамп данных таблицы shop2.product: ~19 rows (приблизительно)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` (`SKU`, `name`, `description`, `img`, `price`, `total`) VALUES
+INSERT INTO `product` (`SKU`, `name`, `description`, `photo`, `price`, `total`) VALUES
 	('10EEE', 'daikin', 'conditioner', '9.jpg', 4000.00, 10),
+	('12er', 'er', 'ert', '', 123.00, 12),
 	('56678', 'ToshibaPr', 'projector', '5.jpg', 270.00, 7),
 	('78999', 'iphone', 'tel', '8.jpg', 1500.00, 500),
 	('888tt', 'GShock', 'GShock', '3.jpg', 530.00, 18),
+	('aaa', '', '', '', 0.00, 0),
+	('er', 'e', 'r', '', 123.00, 5),
+	('hhh', 'yu', 'yu', '\\upload\\smile.jpg', 0.00, 0),
+	('i', 'i', 'i', '\\upload\\smile.jpg', 12.00, 12),
 	('IOPER', 'Samsung', 'microwave', '7.jpg', 1234.00, 8),
+	('kk', '', '', '', 0.00, 0),
+	('l', '', '', '', 0.00, 0),
+	('lll', '3', '', '', 0.00, 0),
+	('mm', '', '', '', 0.00, 0),
+	('pp', '', '', '', 0.00, 0),
 	('QQ345', 'Mikasa', 'volleyball', '10.jpg', 1500.00, 250),
+	('r', 'r', 'r', '\\upload\\smile.jpg', 123.00, 12),
 	('R76EE', 'Asus230', 'Notebook Asus230', '4.jpg', 780.00, 18),
+	('rt', 'rt', 'rt', '\\upload\\smile.jpg', 123.00, 3),
 	('sqser', 'Panasonic', 'player111', '6.jpg', 34.00, 33),
+	('t', 'i', 'i', '\\upload\\smile.jpg', 45.00, 5),
+	('tt', 'tt', 'tt', '', 12.00, 3),
+	('ttt', 'e', 'e', '', 12.00, 34),
 	('TTT45', 'Casio Simple', 'Casio Very Simple', '2.jpg', 100.00, 13),
+	('ty', 't', 't', '\\upload\\smile.jpg', 23.00, 1),
 	('UU12', 'Casio COOL', 'Casio Super COOL', '1.jpg', 1000.00, 7);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
@@ -164,38 +184,41 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`),
   KEY `FK_user_role` (`role_id`),
   CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы shop2.user: ~27 rows (приблизительно)
+-- Дамп данных таблицы shop2.user: ~28 rows (приблизительно)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `is_active`, `skills`, `role_id`, `year`, `photo`) VALUES
-	(2, 'fgh1', 'Petrov1', 'petrov1@gmail.com', '11111', '1', 'PHP,CSS,Javascript,Java,HTML,Web-design', 2, 121, 'upload\\my-foto.jpg'),
-	(3, 'Andrey', 'Andreev', 'andrey@gmail.com', '555656', '1', 'PHP', 2, 12, NULL),
-	(4, 'Denis', 'Denisov', 'denis@gmail.com', '232323', '1', 'HTML,Web-design', 2, 22, NULL),
-	(5, 'Alex', 'Alexeev', 'alex@gmail.com', '343434', '1', 'Web-design', 7, 34, NULL),
+	(2, 'fgh12', 'Petrov12', 'petrov12@gmail.com', '11111', '1', 'PHP,CSS', 6, 15, '\\upload\\dovakin.jpg'),
+	(3, 'Andrey1', 'Andreev1', 'andrey1@gmail.com', '555656', '1', 'CSS,Web-design', 6, 17, '\\upload\\cat.jpg'),
+	(4, 'Denis1', 'Denisov1', 'denis1@gmail.com', '232323', '1', 'HTML,Web-design', 6, 27, '\\upload\\smile.jpg'),
+	(5, 'Alex', 'Alexeev', 'alex@gmail.com', '343434', '1', 'Web-design', 7, 34, '\\upload\\dovakin.jpg'),
 	(10, 'Ivanp1', 'Ivanov1', 'ivanov1@gmail.com', '1111', '0', 'PHP,CSS,Javascript,Web-design', 6, 30, NULL),
 	(12, 'Ivanov', 'ivanov@gmail.com', 'ivanov@yandex.com', '1', '0', 'CSS,Javascript', 6, 11, NULL),
 	(15, 'Kirillov1', 'kirillov1@gmail.com', 'kirillov1@yandex.com', '1', '1', 'PHP,CSS', 7, 34, NULL),
 	(16, 'Sidor', 'Sidorov', 'sidorov@gmail.com', '232323', '1', 'HTML', 2, 15, NULL),
-	(17, NULL, NULL, 'fedorov@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', 'HTML', 2, NULL, NULL),
-	(18, NULL, NULL, 'garik@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', 'HTML', 2, NULL, NULL),
-	(82, NULL, NULL, 'aa@aa.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 5, NULL, NULL),
-	(83, NULL, NULL, 'tt@tt.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(84, NULL, NULL, 'dd@dd.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(85, NULL, NULL, 'ff@ff.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(86, NULL, NULL, 'ddd@dd.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(87, NULL, NULL, 'cc@vv.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(88, NULL, NULL, 'cv@df.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(89, NULL, NULL, 'cvb@fg.d', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(90, NULL, NULL, 'dfg@gh.y', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(91, NULL, NULL, 'asd@df.rt', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(92, NULL, NULL, 'df@rty.y', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(93, NULL, NULL, 'gh@df.r', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
+	(82, 'Дмитрий', 'Скриплёнок', 'aa@aa.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'PHP,CSS,Javascript,HTML', 5, 32, '\\upload\\dovakin.jpg'),
+	(83, 'dfg12', 'dfg', 'tt@tt.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
+	(92, 'y', 't1', 'df@rty.y', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, 23, NULL),
+	(93, NULL, NULL, 'gh1@df.r', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
 	(94, NULL, NULL, 'fg@rty.io', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
 	(95, NULL, NULL, 'jk@il.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
-	(96, 'dfg', 'dg', 'sd@rt.ty', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 6, 56, 'upload\\my-foto.jpg'),
+	(96, 'dfg', 'dg', 'sd@rt.ty', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 6, 56, '\\upload\\timon.jpg'),
 	(97, NULL, NULL, 'dghgh@ff.cn', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'Web-design', 2, NULL, NULL),
-	(98, NULL, NULL, 'sdfg@dfg.ty', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL);
+	(98, NULL, NULL, 'sdfg@dfg.ty', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
+	(99, 'sdf', 'sdfdf', 'sdffd@sdf.tu', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'PHP,CSS,HTML,Web-design', 6, 0, '\\upload\\wolf.jpg'),
+	(100, NULL, NULL, 'nm@nm.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
+	(102, 'sdf1', 'sdf1', 'sdf1@df.ty', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'PHP', 2, 5, '\\upload\\dovakin.jpg'),
+	(104, 'sdf', 'sdf', 'sdff@er.io', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'CSS,HTML,Web-design', 6, 0, '\\upload\\wolf.jpg'),
+	(105, NULL, NULL, 'sdf@df.rt', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, '\\upload\\cat.jpg'),
+	(106, 'fgh', 'fh', 'we@rt.io', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'CSS,HTML', 6, 56, '\\upload\\smile.jpg'),
+	(108, 'wer', 'er', 'ww@ee.e', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'PHP,CSS', 2, 34, '\\upload\\wolf.jpg'),
+	(109, 'df', 'df', 'sfdsf@er.rt', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'PHP', 6, 45, '\\upload\\cat.jpg'),
+	(113, 'w', 'w', 'w@w.w', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'CSS,HTML', 6, 23, '\\upload\\smile.jpg'),
+	(114, 'e', 'e', 't@t.t', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'CSS,HTML', 6, 12, '\\upload\\wolf.jpg'),
+	(117, 'e', 'e', 'e@e.e', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML,Web-design', 2, 12, '\\upload\\cat.jpg'),
+	(125, NULL, NULL, 'g@g.g', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, NULL),
+	(126, 'p', NULL, 'jj@j.j', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', 'HTML', 2, NULL, '\\upload\\smile.jpg');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
