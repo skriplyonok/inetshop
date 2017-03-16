@@ -1,26 +1,37 @@
-<h2>Заказы</h2>
+<?php if(!$update) echo '<h2>Заказы</h2>'; ?>
 <table>  
     <thead>
         <tr>
-            <th>   
-                <a class="insert" href="/admin/insert/table/<?php echo $table; ?>">Добавить</a>
-                Код заказа
-            </th>  
+            <th>
+                <?php if(!$update) echo '<a class="insert" href="/admin/insert/table/' . $table . '">Добавить</a>'; ?>
+                Код
+            </th> 
             <th>Код клиента</th>    
             <th>Дата</th> 
             <th>Сумма</th> 
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($model as $value) { ?>
-            <tr>
-                <td><?php echo $value->id; ?></td>
-                <td><?php echo $value->user_id; ?></td>
-                <td><?php echo $value->date; ?></td>
-                <td><?php echo $value->sum; ?></td>
-                <td><input type="button" data-id="<?php echo $value->sku; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
-                <td><input type="button" data-id="<?php echo $value->sku; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
-            </tr>
-        <?php } ?>
+        <?php if(!$update)
+            {   
+                foreach ($model as $value) { ?>
+                    <tr>
+                        <td><?php echo $value->id; ?></td>
+                        <td><?php echo $value->user_id; ?></td>
+                        <td><?php echo $value->date; ?></td>
+                        <td><?php echo $value->sum; ?></td>
+                        <td><input type="button" data-id="<?php echo $value->id; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                        <td><input type="button" data-id="<?php echo $value->id; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
+                    </tr>
+            <?php   }
+            }else{    
+            ?>
+                    <tr>
+                        <td><?php echo $model->id; ?></td>
+                        <td><?php echo $model->user_id; ?></td>
+                        <td><?php echo $model->date; ?></td>
+                        <td><?php echo $model->sum; ?></td>
+                    </tr>  
+            <?php } ?>       
     </tbody>
 </table>

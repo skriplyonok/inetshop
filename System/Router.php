@@ -66,6 +66,7 @@ class System_Router
         $view = $controller->view;
         
         $viewNameTable = 'View' . DS . $controllerName . DS . 'Table' . DS . $view->getParam('table') . '.phtml';
+        
         $viewNameForm = 'View' . DS . $controllerName . DS . 'Form' . DS . $view->getParam('table') . '.phtml';
         
         $layoutFileName = 'View' . DS . 'layout.phtml';

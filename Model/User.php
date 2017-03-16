@@ -82,7 +82,6 @@ class Model_User
     {
         $dbUser     =  new Model_Db_Table_User();
         $userData = $dbUser->getById($userId)[0];
-        //$userData   =  !empty($userData[0]) ? array_shift($dbUser->getById($userId)) : '';
         
         if(!empty($userData)) {
             $modelUser  = new self();
@@ -161,7 +160,7 @@ class Model_User
             }
             
             if(!$res) {
-                throw new Exception('Can\'t create new user. Try later.', System_Exception :: ERROR_CREATE_USER);
+                throw new Exception('Can\'t create\update user. Try later.', System_Exception :: ERROR_CREATE_USER);
             }
             return $res;
         }

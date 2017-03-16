@@ -1,10 +1,11 @@
-<h2>Товары</h2>
+<?php if(!$update) echo '<h2>Товары</h2>'; ?>
 <table>  
     <thead>
         <tr>
-            <th>   
-                <a class="insert" href="/admin/insert/table/<?php echo $table; ?>">Добавить</a>Код</th>    
-            <th>Код</th>    
+            <th>
+                <?php if(!$update) echo '<a class="insert" href="/admin/insert/table/' . $table . '">Добавить</a>'; ?>
+                Код
+            </th> 
             <th>Название</th>    
             <th>Описание</th> 
             <th>Фото</th> 
@@ -13,17 +14,30 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($model as $value) { ?>
-            <tr>
-                <td><?php echo $value->sku; ?></td>
-                <td><?php echo $value->name; ?></td>
-                <td><?php echo $value->description; ?></td>
-                <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
-                <td><?php echo $value->price; ?></td>
-                <td><?php echo $value->total; ?></td>
-                <td><input type="button" data-id="<?php echo $value->sku; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
-                <td><input type="button" data-id="<?php echo $value->sku; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
-            </tr>
-        <?php } ?>
+        <?php if(!$update)
+            {  
+                foreach ($model as $value) { ?>
+                    <tr>
+                        <td><?php echo $value->sku; ?></td>
+                        <td><?php echo $value->name; ?></td>
+                        <td><?php echo $value->description; ?></td>
+                        <td><img class="photo" src="<?php echo $value->photo; ?>" alt="photo"></td>
+                        <td><?php echo $value->price; ?></td>
+                        <td><?php echo $value->total; ?></td>
+                        <td><input type="button" data-id="<?php echo $value->sku; ?>" class="edit" data-table="<?php echo $table; ?>"></td>
+                        <td><input type="button" data-id="<?php echo $value->sku; ?>" class="delete" data-table="<?php echo $table; ?>"></td>
+                    </tr>
+            <?php   }
+            }else{    
+            ?>          
+                    <tr>
+                        <td><?php echo $model->sku; ?></td>
+                        <td><?php echo $model->name; ?></td>
+                        <td><?php echo $model->description; ?></td>
+                        <td><img class="photo" src="<?php echo $model->photo; ?>" alt="photo"></td>
+                        <td><?php echo $model->price; ?></td>
+                        <td><?php echo $model->total; ?></td>
+                    </tr>
+            <?php } ?>
     </tbody>
 </table>

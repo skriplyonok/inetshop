@@ -48,11 +48,11 @@ abstract class System_Db_Table
     {
         $table = $this->getTable();
         
-        $sql    = 'select * from ' . $table . ' where id = ?';
+        $sql    = 'select * from `' . $table . '` where id = ?';
         
         if($table == 'product')
         {
-            $sql    = 'select * from ' . $table . ' where SKU = ?';
+            $sql    = 'select * from `' . $table . '` where SKU = ?';
         }
         
         $sth    = $this->getConnection()->prepare($sql);
@@ -60,7 +60,7 @@ abstract class System_Db_Table
         $sth->execute(array($id));
         
         $result = $sth->fetchAll(PDO::FETCH_OBJ);
-               
+        
         return $result;
     }
     
@@ -92,7 +92,7 @@ abstract class System_Db_Table
         $forQueryPlace = implode(', ', $rangePlace);
         
         try {
-            $sth = $this->getConnection()->prepare('INSERT INTO ' . $this->getTable() . ' ('.$forQueryFields.') values ('.$forQueryPlace.')');
+            $sth = $this->getConnection()->prepare('INSERT INTO `' . $this->getTable() . '` ('.$forQueryFields.') values ('.$forQueryPlace.')');
 
             $result = $sth->execute($arrayData);
             
@@ -101,7 +101,13 @@ abstract class System_Db_Table
             exit();
         }
         
-        return $result;          
+        if($result) {
+            if($this->getTable() == 'product')
+            {
+                return $result;
+            }
+            return $this->getConnection()->lastInsertId();
+        }     
 
     }
     
@@ -136,7 +142,7 @@ abstract class System_Db_Table
       
   
         try {
-            $sth = $this->getConnection()->prepare('update ' . $this->getTable() . ' set ' . $forQueryPlace);
+            $sth = $this->getConnection()->prepare('update `' . $this->getTable() . '` set ' . $forQueryPlace);
 
             $result = $sth->execute($arrayData);
         } catch (PDOException $e) {
@@ -168,7 +174,7 @@ abstract class System_Db_Table
                
         try {
             
-            $sth = $this->getConnection()->prepare('delete from ' . $this->getTable() . ' where ' . $arraySetFields[0] . '="' . $arrayData[0] . '"');
+            $sth = $this->getConnection()->prepare('delete from `' . $this->getTable() . '` where ' . $arraySetFields[0] . '="' . $arrayData[0] . '"');
             $result = $sth->execute();
             
         } catch (PDOException $e) {
@@ -181,7 +187,7 @@ abstract class System_Db_Table
     private function _getFields()
     {
         $dbh    = $this->getConnection();
-        $sth = $dbh->prepare('SHOW COLUMNS FROM ' . $this->getTable());
+        $sth = $dbh->prepare('SHOW COLUMNS FROM `' . $this->getTable() . '`');
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
         $fields = [];

@@ -135,7 +135,7 @@ $(document).ready(function() {
     
     $('a.ok').click(function(e){
         e.preventDefault();
-        window.location = '/admin/' + table;
+        window.location = '/admin/select/table/' + table;
     });
 
 

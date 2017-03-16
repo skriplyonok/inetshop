@@ -1,1 +1,14 @@
-
+<form <?php
+if ($is_save) {
+    echo 'class="hide"';
+}
+?> name="insert" action="/admin/save/table/<?php echo $table; ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
+    <p>
+        <?php if($update) echo '<input type="hidden" name="id" value="' . $model->id . '"/><br />';
+        ?>
+        <input placeholder="Код клиента" type="text" name="user_id" maxlength="20" <?php if($update) echo 'value="' . $model->user_id . '"'; ?>/><br />
+        <input placeholder="Дата" type="date" name="date" maxlength="20" <?php if($update) echo 'value="' . $model->date . '"'; ?>/><br />        
+        <input placeholder="Сумма" type="text" name="sum" maxlength="30" <?php if($update) echo 'value="' . $model->sum . '"'; ?>/><br />
+    </p>     
+    <input type="submit" name="<?php if($update) echo 'update'; else echo 'insert'; ?>" value="Сохранить" />
+</form>

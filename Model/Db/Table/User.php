@@ -26,7 +26,7 @@ class Model_Db_Table_User extends System_Db_Table
          */
         $sth = $this->getConnection()->prepare($sql);
         $sth->execute($requestParams);
-        $result = $sth->fetchAll(PDO::FETCH_OBJ);        
+        $result = $sth->fetchAll(PDO::FETCH_OBJ);
         
         return $result;
     }

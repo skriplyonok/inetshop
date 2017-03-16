@@ -16,20 +16,7 @@ class Controller_Admin extends System_Controller
     {
         
     }
-    
-//    public function userAction()
-//    {          
-//        try {
-//            $modelName = $this->_modelName;
-//            $all = $modelName :: getAll();
-//            $this->view->setParam('all', $all);
-//            $this->view->setParam('table', $this->_tableName);
-//        }
-//        catch(Exception $e) {
-//            $this->view->setParam('error', $e->getMessage());
-//        }
-//    }
-    
+       
     public function selectAction()
     {          
         try {
@@ -42,20 +29,7 @@ class Controller_Admin extends System_Controller
             $this->view->setParam('error', $e->getMessage());
         }
     }
-    
-//    public function productAction()
-//    {   
-//        try {
-//            $modelName = $this->_modelName;
-//            $all = $modelName :: getAll();
-//            $this->view->setParam('all', $all);
-//            $this->view->setParam('table', $this->_tableName);
-//        }
-//        catch(Exception $e) {
-//            $this->view->setParam('error', $e->getMessage());
-//        }
-//    }
-    
+       
     public function insertAction()
     {     
             $this->view->setParam('table', $this->_tableName);
@@ -80,8 +54,13 @@ class Controller_Admin extends System_Controller
     public function saveAction()
     {
             
-        $params = $this->prepareParams();
-
+        if($this->_tableName == 'order')
+        {
+            $params = $this->getParams();
+        }else{
+            $params = $this->prepareParams();
+        }
+               
         $modelName = $this->_modelName;
         $model = new $modelName();
         

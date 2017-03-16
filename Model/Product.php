@@ -114,7 +114,7 @@ class Model_Product
             }
             
             if(!$res) {
-                throw new Exception('Can\'t create new product. Try later.', System_Exception :: ERROR_CREATE_USER);
+                throw new Exception('Can\'t create\update product. Try later.', System_Exception :: ERROR_CREATE_USER);
             }
             return $res;
         }
